@@ -3,6 +3,7 @@
 **🎯 Objectif** : Identifier le niveau de maturité de votre Direction des Systèmes d’Information sur 25 niveaux répartis dans 8 grandes **catégories clés**.
 Pour chaque question, choisissez la réponse la plus représentative de votre situation. Une **explication est fournie** pour chaque choix.
 
+
 ---
 
 ## 📁 1. Gestion des Incidents et de l’Exploitation
