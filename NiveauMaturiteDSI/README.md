@@ -1,150 +1,221 @@
-# 🧭 **Quiz de Positionnement de la Maturité d'une DSI**
+# 🧭 **Quiz : Évaluez la Maturité de Votre DSI**
 
-**🎯 Objectif** : Identifier le niveau de maturité de votre Direction des Systèmes d’Information sur 25 niveaux répartis dans 8 grandes **catégories clés**.
-Pour chaque question, choisissez la réponse la plus représentative de votre situation. Une **explication est fournie** pour chaque choix.
-
-
----
-
-## 📁 1. Gestion des Incidents et de l’Exploitation
-
-**Question 1 – Comment votre DSI gère-t-elle les incidents ?**
-🔘 A) 😱 **Aucune gestion structurée**
-
-> Les incidents sont résolus au cas par cas sans enregistrement ni suivi.
-> 🔘 B) 📝 **Liste manuelle et réactive**
-> Les incidents sont notés dans un fichier Excel ou un cahier, mais sans processus formel.
-> 🔘 C) ⚙️ **Processus partiels en place**
-> Certaines procédures existent, mais elles ne sont pas systématiques.
-> 🔘 D) 🧮 **Outil ITSM + KPIs**
-> Utilisation d’un outil comme GLPI ou ServiceNow, avec indicateurs suivis.
-> 🔘 E) 🧠 **ITSM complet + Amélioration continue**
-> Incident Management automatisé, revues post-mortem et démarche d’amélioration constante.
+**🎯 Objectif** : Identifier votre position sur une échelle de 25 niveaux répartis en 8 **catégories clés**.
+**📝 Instructions** : Pour chaque question, choisissez **UNE** réponse qui correspond le mieux à votre situation actuelle.
 
 ---
 
-## 🧾 2. Documentation & Processus
+## 📁 1. **Gestion des Incidents et de l’Exploitation**
 
-**Question 2 – Quel est l’état de votre documentation ?**
-🔘 A) 📦 **Quasi inexistante**
+**Question 1 : Comment votre DSI gère-t-elle les incidents ?**
 
-> Les savoirs sont détenus oralement ou dans des documents éparpillés.
-> 🔘 B) 🗒️ **Dispersée et obsolète**
-> Documentation présente mais rarement à jour ni centralisée.
-> 🔘 C) 📚 **Standardisation en cours**
-> Des processus critiques sont documentés avec une volonté de structuration.
-> 🔘 D) 🏛️ **Référentiel vivant**
-> Documentation centralisée, maintenue, utilisée dans les projets.
-> 🔘 E) 🌐 **Knowledge management**
-> Base de connaissances active, processus de mise à jour continue, accès transversal.
+* 😱 **A)** Aucune gestion structurée
 
----
+  > Les incidents sont traités au cas par cas, sans suivi ni documentation.
 
-## 🧩 3. Alignement IT / Métier
+* 📝 **B)** Liste manuelle et réactive
 
-**Question 3 – Quelle est la place de l’IT dans la stratégie de l’entreprise ?**
-🔘 A) 🚫 **L’IT est isolée**
+  > Les incidents sont notés dans des fichiers ou carnets, sans processus formel.
 
-> Décisions métiers sans implication de la DSI.
-> 🔘 B) 👂 **IT consultée ponctuellement**
-> Implication réactive sur les projets décidés par les métiers.
-> 🔘 C) 🤝 **Participation régulière**
-> La DSI est présente dans les projets stratégiques mais sans rôle moteur.
-> 🔘 D) 🧩 **Co-construction des feuilles de route**
-> DSI et métiers travaillent ensemble sur les roadmaps.
-> 🔘 E) 🎯 **Partenaire stratégique**
-> IT est perçue comme créatrice de valeur, acteur de transformation.
+* ⚙️ **C)** Processus partiels en place
+
+  > Des procédures existent mais sont appliquées de manière inégale.
+
+* 🧮 **D)** Outil ITSM + KPIs
+
+  > Utilisation d’un outil (ex : GLPI, ServiceNow) avec des indicateurs de performance suivis.
+
+* 🧠 **E)** ITSM complet + Amélioration continue
+
+  > Gestion automatisée, suivi rigoureux, post-mortem, amélioration continue intégrée.
 
 ---
 
-## 🧪 4. Culture d’Innovation
+## 🧾 2. **Documentation & Processus**
 
-**Question 4 – L’innovation est-elle encouragée dans votre DSI ?**
-🔘 A) 🚷 **Aucune place pour l’innovation**
+**Question 2 : Quel est l’état de votre documentation ?**
 
-> Priorité à la production, aucun budget ni temps pour innover.
-> 🔘 B) 🧪 **Petites expérimentations isolées**
-> Quelques projets lancés par des équipes motivées, sans cadre formel.
-> 🔘 C) 💡 **Cellule innovation en place**
-> Innovation structurée, budget dédié, processus de sélection d’idées.
-> 🔘 D) 🧬 **Innovation collaborative**
-> Partenariats avec des startups, hackathons internes, projets pilotes.
-> 🔘 E) 🚀 **Innovation continue & ouverte**
-> Innovation intégrée aux méthodes de travail, culture agile, orientation produit.
+* 📦 **A)** Quasi inexistante
 
----
+  > Savoirs non formalisés ou dispersés.
 
-## 🔐 5. Sécurité et Conformité
+* 🗒️ **B)** Dispersée et obsolète
 
-**Question 5 – Où en est votre posture de sécurité ?**
-🔘 A) 🧨 **Risque élevé non traité**
+  > Présente mais rarement à jour ou centralisée.
 
-> Absence de politique de sécurité, mots de passe faibles, utilisateurs non formés.
-> 🔘 B) 🛡️ **Sensibilisation basique**
-> Quelques formations ou emails, mais rien de structuré.
-> 🔘 C) 🔍 **Politiques établies**
-> Charte informatique, politique RGPD, audit de vulnérabilité occasionnel.
-> 🔘 D) 🔒 **Outils de sécurité avancés**
-> Antivirus, SIEM, MFA, gestion des accès, tests réguliers.
-> 🔘 E) 🔐 **Cybersécurité intégrée**
-> Gouvernance SSI, CISO désigné, conformité ISO/IEC 27001, surveillance proactive.
+* 📚 **C)** Standardisation en cours
+
+  > Documentations critiques disponibles, standardisation amorcée.
+
+* 🏛️ **D)** Référentiel vivant
+
+  > Documentation structurée, mise à jour régulière, utilisée dans les projets.
+
+* 🌐 **E)** Knowledge management
+
+  > Base de connaissance dynamique, processus de mise à jour et d’usage institutionnalisés.
 
 ---
 
-## ⚙️ 6. Automatisation et DevOps
+## 🧩 3. **Alignement IT / Métier**
 
-**Question 6 – Quel est le niveau d’automatisation de vos opérations ?**
-🔘 A) 🧹 **Tout est manuel**
+**Question 3 : Quelle est la place de l’IT dans la stratégie de l’entreprise ?**
 
-> Déploiements, sauvegardes, et tests effectués à la main.
-> 🔘 B) 🔧 **Scripts manuels isolés**
-> Quelques automatisations locales (bash, PowerShell, etc.).
-> 🔘 C) 🧰 **Automatisation partielle**
-> Tâches récurrentes automatisées avec Jenkins ou Ansible.
-> 🔘 D) 🤖 **Chaînes CI/CD établies**
-> DevOps en place, pipelines, tests automatiques, déploiements continus.
-> 🔘 E) 🧠 **Orchestration intelligente**
-> Intégration IA, supervision proactive, SRE (Site Reliability Engineering).
+* 🚫 **A)** L’IT est isolée
 
----
+  > Aucun lien entre stratégie métier et système d'information.
 
-## 🔗 7. Gouvernance et Fournisseurs
+* 👂 **B)** IT consultée ponctuellement
 
-**Question 7 – Comment gérez-vous vos partenaires IT ?**
-🔘 A) 🧩 **Relations improvisées**
+  > IT appelée une fois les décisions prises.
 
-> Pas de contrat clair, dépendance forte à un fournisseur.
-> 🔘 B) 🗂️ **Suivi administratif de base**
-> Contrats archivés mais non pilotés.
-> 🔘 C) 📊 **Tableau de suivi contractuel**
-> Indicateurs de performance, revues fournisseurs.
-> 🔘 D) 🧾 **Partenariats pilotés**
-> Évaluation des risques, intégration dans le plan stratégique.
-> 🔘 E) 🤝 **Écosystème stratégique**
-> Partenariats win-win, co-innovation avec les fournisseurs.
+* 🤝 **C)** Participation régulière
+
+  > L’IT est présente dans les projets métiers mais n’a pas d’influence stratégique.
+
+* 🧩 **D)** Co-construction des feuilles de route
+
+  > L’IT participe activement à la stratégie et aux priorités métiers.
+
+* 🎯 **E)** Partenaire stratégique
+
+  > L’IT est moteur de création de valeur et transformation digitale.
 
 ---
 
-## 📈 8. Données & Intelligence d’affaires
+## 🧪 4. **Culture d’Innovation**
 
-**Question 8 – Quelle est votre capacité à valoriser vos données ?**
-🔘 A) 🕳️ **Aucune exploitation réelle**
+**Question 4 : L’innovation est-elle encouragée dans votre DSI ?**
 
-> Les données sont dispersées, non accessibles ni utilisées.
-> 🔘 B) 🧾 **Rapports basiques manuels**
-> Quelques tableaux Excel, peu de croisement d'informations.
-> 🔘 C) 📊 **Dashboard opérationnel**
-> Mise en place de KPI via Power BI/Tableau pour pilotage.
-> 🔘 D) 📈 **Analyse prédictive en cours**
-> Exploitation avancée des données avec algorithmes ou machine learning.
-> 🔘 E) 🤖 **Stratégie data-driven**
-> Gouvernance de la donnée, IA intégrée, MDM, pilotage par la donnée.
+* 🚷 **A)** Aucune place pour l’innovation
+
+  > La production prime, aucune expérimentation.
+
+* 🧪 **B)** Petites expérimentations isolées
+
+  > Quelques idées portées par des individus motivés.
+
+* 💡 **C)** Cellule innovation en place
+
+  > Innovation structurée avec budget et pilote.
+
+* 🧬 **D)** Innovation collaborative
+
+  > Partenariats, hackathons, explorations croisées.
+
+* 🚀 **E)** Innovation continue & ouverte
+
+  > L’innovation est ancrée dans la culture, pilotée avec agilité.
 
 ---
 
-# 🧮 Calcul de votre niveau de maturité
+## 🔐 5. **Sécurité et Conformité**
 
-Pour chaque réponse :
+**Question 5 : Où en est votre posture de sécurité ?**
+
+* 🧨 **A)** Risque élevé non traité
+
+  > Aucune politique, systèmes vulnérables.
+
+* 🛡️ **B)** Sensibilisation basique
+
+  > Affiches ou mails de sensibilisation uniquement.
+
+* 🔍 **C)** Politiques établies
+
+  > Charte informatique, RGPD en cours, premiers audits.
+
+* 🔒 **D)** Outils de sécurité avancés
+
+  > Antivirus, MFA, audits réguliers, SIEM.
+
+* 🔐 **E)** Cybersécurité intégrée
+
+  > Gouvernance SSI, conformité ISO/IEC 27001, surveillance proactive.
+
+---
+
+## ⚙️ 6. **Automatisation et DevOps**
+
+**Question 6 : Quel est le niveau d’automatisation de vos opérations ?**
+
+* 🧹 **A)** Tout est manuel
+
+  > Scripts et déploiements réalisés à la main.
+
+* 🔧 **B)** Scripts manuels isolés
+
+  > Automatisations locales non industrialisées.
+
+* 🧰 **C)** Automatisation partielle
+
+  > Jenkins, Ansible ou autres outils utilisés pour certaines tâches.
+
+* 🤖 **D)** Chaînes CI/CD établies
+
+  > Déploiements automatisés, intégration continue mise en place.
+
+* 🧠 **E)** Orchestration intelligente
+
+  > Supervision proactive, SRE, automatisation orientée résilience.
+
+---
+
+## 🔗 7. **Gouvernance et Fournisseurs**
+
+**Question 7 : Comment gérez-vous vos fournisseurs ?**
+
+* 🧩 **A)** Relations improvisées
+
+  > Pas de contrat clair, forte dépendance.
+
+* 🗂️ **B)** Suivi administratif de base
+
+  > Gestion des contrats sans évaluation réelle.
+
+* 📊 **C)** Tableau de suivi contractuel
+
+  > Suivi de performance basique avec indicateurs.
+
+* 🧾 **D)** Partenariats pilotés
+
+  > Évaluation des risques, intégration stratégique.
+
+* 🤝 **E)** Écosystème stratégique
+
+  > Co-innovation, valeur partagée, partenaires clés.
+
+---
+
+## 📈 8. **Données & Intelligence d’affaires**
+
+**Question 8 : Quelle est votre capacité à exploiter les données ?**
+
+* 🕳️ **A)** Aucune exploitation réelle
+
+  > Données non structurées ni accessibles.
+
+* 🧾 **B)** Rapports basiques manuels
+
+  > Quelques tableaux Excel, pas de croisement ni d’automatisation.
+
+* 📊 **C)** Dashboard opérationnel
+
+  > Power BI ou Tableau déployé, visualisation des KPI.
+
+* 📈 **D)** Analyse prédictive en cours
+
+  > Algorithmes de prédiction, projets IA exploratoires.
+
+* 🤖 **E)** Stratégie data-driven
+
+  > Gouvernance des données, IA en production, pilotage décisionnel.
+
+---
+
+# 🧮 **Interprétation du Score**
+
+➡️ **Attribuez les points suivants** selon vos réponses :
 
 * A = 1 point
 * B = 2 points
@@ -152,17 +223,15 @@ Pour chaque réponse :
 * D = 4 points
 * E = 5 points
 
-**Total maximum :** 8 questions × 5 = **40 points**
-**Faites la somme de vos points** pour vous positionner :
+🎯 **Score Maximum** : 8 questions × 5 = **40 points**
 
-| Score Total | Niveau de Maturité | Description                                                                     |
-| ----------- | ------------------ | ------------------------------------------------------------------------------- |
-| 8–12        | 🌪️ Niveau 1–5     | Maturité embryonnaire, DSI en survie. Priorité à la structuration.              |
-| 13–20       | 🧱 Niveau 6–10     | DSI en structuration, début de normalisation.                                   |
-| 21–27       | ⚙️ Niveau 11–17    | Processus en place, DSI proactive, automatisation et sécurité progressent.      |
-| 28–34       | 🚀 Niveau 18–24    | DSI mature, pilotage, innovation, alignement fort avec les métiers.             |
-| 35–40       | 🧠 Niveau 25+      | DSI visionnaire, excellence opérationnelle, transformation digitale en continu. |
+| Total     | Niveau de Maturité  | Explication                                                             |
+| --------- | ------------------- | ----------------------------------------------------------------------- |
+| **8–12**  | 🌪️ **Niveau 1–5**  | DSI en mode survie – besoins critiques de structuration.                |
+| **13–20** | 🧱 **Niveau 6–10**  | Début de structuration – documentation, sécurité, gouvernance à lancer. |
+| **21–27** | ⚙️ **Niveau 11–17** | Processus actifs – montée en compétence, automatisation en cours.       |
+| **28–34** | 🚀 **Niveau 18–24** | DSI mature – innovation, DevOps, partenariat métier.                    |
+| **35–40** | 🧠 **Niveau 25+**   | DSI visionnaire – transformation digitale, excellence continue.         |
 
 ---
-
 
