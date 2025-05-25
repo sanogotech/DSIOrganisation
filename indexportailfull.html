@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Stratégique de la DSI Moderne</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+        }
+		
+		  header {
+      background-color: #2d3436;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 500;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            border-bottom: none;
+        }
+        
+        .badge-primary {
+            background-color: var(--secondary-color);
+        }
+        
+        .section-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: var(--secondary-color);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .best-practice {
+            border-left: 4px solid #2ecc71;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .bad-practice {
+            border-left: 4px solid #e74c3c;
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .reference-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .org-chart {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        
+        .org-chart pre {
+            background-color: transparent;
+            border: none;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            margin: 0;
+        }
+        
+        .tab-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 600;
+            border: none;
+            padding: 12px 20px;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--secondary-color) !important;
+            background-color: transparent;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .table thead {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 99;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-network-wired me-2"></i>DSI MODERNE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#introduction"><i class="fas fa-home me-1"></i> Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#organisation"><i class="fas fa-sitemap me-1"></i> Organisation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bonnes-pratiques"><i class="fas fa-check-circle me-1"></i> Bonnes Pratiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mauvaises-pratiques"><i class="fas fa-times-circle me-1"></i> Mauvaises Pratiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cas-pratiques"><i class="fas fa-laptop-code me-1"></i> Cas Pratiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#references"><i class="fas fa-book me-1"></i> Références</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+	
+	<header>
+    <h1>📘 Portail d'Organisation de la DSI</h1>
+    <p>Vision stratégique, fonctionnelle et technique alignée sur les bonnes pratiques (CIGREF, TOGAF, ITIL, COBIT)</p>
+  </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="introduction">
+        <div class="container text-center">
+            <h1 class="hero-title">Guide Stratégique de la DSI Moderne</h1>
+            <p class="hero-subtitle">Transformation numérique, gouvernance IT et création de valeur</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#organisation" class="btn btn-light btn-lg px-4">Découvrir l'organisation</a>
+                <a href="#bonnes-pratiques" class="btn btn-outline-light btn-lg px-4">Bonnes pratiques</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="container mb-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-title">Pourquoi structurer la DSI ?</h2>
+                <p class="lead">La Direction des Systèmes d'Information ne doit plus être perçue uniquement comme un service de support technique, mais comme un <strong>acteur stratégique majeur</strong> de la transformation numérique.</p>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-bullseye fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Alignement métier</h5>
+                        <p class="card-text">S'aligner parfaitement avec les besoins métiers pour créer de la valeur.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Gouvernance & risques</h5>
+                        <p class="card-text">Intégrer des pratiques modernes de gouvernance et gestion des risques.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-rocket fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Innovation</h5>
+                        <p class="card-text">Être capable d'évoluer rapidement face aux disruptions technologiques.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Contexte et enjeux clés
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Forces qui impactent la DSI</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Transformation numérique accélérée</li>
+                                    <li class="list-group-item">Complexité croissante des systèmes</li>
+                                    <li class="list-group-item">Gouvernance renforcée</li>
+                                    <li class="list-group-item">Pression économique</li>
+                                    <li class="list-group-item">Exigences métiers</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Objectifs d'une DSI moderne</h5>
+                                <ol class="list-group list-group-numbered list-group-flush">
+                                    <li class="list-group-item">Aligner l'IT avec les besoins métiers</li>
+                                    <li class="list-group-item">Piloter l'innovation et la résilience</li>
+                                    <li class="list-group-item">Mettre en place une gouvernance intégrée</li>
+                                    <li class="list-group-item">Optimiser les coûts et processus</li>
+                                    <li class="list-group-item">Instaurer une culture SSI</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organisation Section -->
+    <section class="container mb-5" id="organisation">
+        <h2 class="section-title text-center">Organisation de la DSI Moderne</h2>
+        
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-project-diagram me-2"></i>Schéma organisationnel
+                    </div>
+                    <div class="card-body">
+                        <div class="org-chart">
+                            <pre>
+
+
+                       ┌────────────────────────────────────────┐
+                       │      Directeur des Systèmes            │
+                       │          d'Information (DSI)           │
+                       └────────────────────────────────────────┘
+                                      │
+     ┌────────────────────────────────┼────────────────────────────────┐
+     │                                │                                │
+┌────────────┐              ┌────────────────┐               ┌──────────────────┐
+│ Office de  │              │ CTO / Direction│               │ CISO / RSSI      │
+│ la DSI     │              │ Technique (CTO)│               │ Sécurité         │
+└────────────┘              └────────────────┘               └──────────────────┘
+     │                                │                                │
+     ▼                                ▼                                ▼
+
+┌────────────────────┐    ┌────────────────────┐       ┌────────────────────────┐
+│ Stratégie SI       │    │ Architecture SI    │       │ Sécurité Opérationnelle│
+│ - Schéma directeur │    - Urbanisation SI            - SOC / SIEM / NOC       │
+│ - Budget & KPIs    │    - Cartographie applicative   - Supervision sécurité   │
+│ - Veille technologique│ - Cloud, DevOps, CI/CD        - IAM / MFA / ZTNA       │
+└────────────────────┘    - API Management              └────────────────────────┘
+
+┌────────────────────┐    ┌────────────────────┐       ┌────────────────────────┐
+│ PMO & Projets      │    │ Production & Support│      │ Gouvernance SSI        │
+│ - Méthodes (Agile) │    - ITIL / ITSM / CMDB         - Politique sécurité     │
+│ - Portfolio projets│    - SRE / Monitoring            - Gestion des risques    │
+│ - Qualité SI       │    - Helpdesk & Support         - Conformité ISO / RGPD  │
+└────────────────────┘    - Automatisation Ops          └────────────────────────┘
+
+┌────────────────────┐    ┌────────────────────┐       ┌────────────────────────┐
+│ Développement Apps │    │ Données & IA       │       │ Gestion Fournisseurs   │
+│ - ERP / CRM / BI   │    - Gouvernance données        - SLA / KPI / Contrats   │
+│ - API / Mobile / UX│    - Big Data / Data Lake       - Intégration fournisseurs│
+│ - DevSecOps / TDD  │    - IA / ML / NLP              └────────────────────────┘
+└────────────────────┘    - Data Quality / MDM
+
+┌────────────────────┐    ┌────────────────────┐       ┌────────────────────────┐
+│ BRM / Métiers      │    │ Direction Innovation│      │ Conformité / GRC       │
+│ - Recueil besoins  │    - Veille stratégique         - ISO, RGPD, LPM         │
+│ - Change Management│    - Projets pilotes / POC      - Audit / Contrôle interne│
+│ - Alignement IT-Biz│    - Labs (IoT, IA, RPA...)     - Gestion des incidents  │
+└────────────────────┘    - Partenariats technologiques └────────────────────────┘
+
+
+				┌──────────────────────────────────────────────┐       
+			          │ Infrastructure, Réseau & Télécom       │      
+				- Infrastructure serveurs (on-prem / cloud)          │
+				- Virtualisation (VMware, KVM), containers           │
+				- Réseaux LAN / WAN / SD-WAN / VPN                   │
+				- Téléphonie IP / VoIP / ToIP / visioconf            │
+				- Interconnexion Datacenters / Redondance            │  
+				- Firewall, pare-feu, proxy, DNS, DHCP               │
+				- Monitoring réseau & QoS                            │
+			   └─────────────────────────────────────────────────────┘
+
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		
+		<div class="org-chart-container">
+  <div class="org-level-1">
+    <div class="org-node director">
+      <i class="fas fa-user-tie"></i>
+      <h5>Directeur des Systèmes d'Information (DSI)</h5>
+    </div>
+  </div>
+  
+  <div class="org-connector"></div>
+  
+  <div class="org-level-2">
+    <div class="org-node">
+      <i class="fas fa-desktop"></i>
+      <h6>Secrétariat DSI (Office)</h6>
+    </div>
+    <div class="org-node cto">
+      <i class="fas fa-code"></i>
+      <h6>CTO / Direction Technique</h6>
+      <small>Run/Dev</small>
+    </div>
+    <div class="org-node security">
+      <i class="fas fa-shield-alt"></i>
+      <h6>RSSI / CISO / DPO</h6>
+      <small>Gouvernance SSI</small>
+    </div>
+  </div>
+  
+  <div class="org-connector-2"></div>
+  
+  <div class="org-level-3">
+    <!-- Colonne Stratégie & Pilotage -->
+    <div class="org-column">
+      <div class="org-column-header">
+        <i class="fas fa-chess"></i>
+        <h6>Stratégie & Pilotage</h6>
+      </div>
+      <ul class="org-list">
+        <li><i class="fas fa-project-diagram"></i> PMO / Portfolio projets</li>
+        <li><i class="fas fa-coins"></i> Budget & KPIs</li>
+        <li><i class="fas fa-handshake"></i> Alignement IT-Métier</li>
+        <li><i class="fas fa-binoculars"></i> Veille technologique</li>
+      </ul>
+    </div>
+    
+    <!-- Colonne Architecture & Delivery -->
+    <div class="org-column">
+      <div class="org-column-header">
+        <i class="fas fa-sitemap"></i>
+        <h6>Architecture & Delivery</h6>
+      </div>
+      <ul class="org-list">
+        <li><i class="fas fa-city"></i> Urbanisation / TOGAF</li>
+        <li><i class="fas fa-cloud"></i> Cloud / DevOps / SRE</li>
+        <li><i class="fas fa-chart-line"></i> Performance / Monitoring</li>
+        <li><i class="fas fa-plug"></i> API Management / Conteneurs</li>
+      </ul>
+    </div>
+    
+    <!-- Colonne Sécurité & Conformité -->
+    <div class="org-column">
+      <div class="org-column-header">
+        <i class="fas fa-lock"></i>
+        <h6>Sécurité & Conformité</h6>
+      </div>
+      <ul class="org-list">
+        <li><i class="fas fa-gavel"></i> Gouvernance SSI (COBIT)</li>
+        <li><i class="fas fa-file-contract"></i> Conformité RGPD / ISO27001</li>
+        <li><i class="fas fa-user-lock"></i> Gestion des identités (IAM)</li>
+        <li><i class="fas fa-eye"></i> SOC / SIEM / PRA-PCA</li>
+      </ul>
+    </div>
+  </div>
+  
+
+
+<style>
+.org-chart-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.org-level-1, .org-level-2, .org-level-3, .org-level-4, .org-level-5 {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.org-node {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 0 15px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  width: 200px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.org-node:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.org-node.director {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  color: white;
+  padding: 25px;
+  width: 300px;
+}
+
+.org-node.cto {
+  border-top: 4px solid #3498db;
+}
+
+.org-node.security {
+  border-top: 4px solid #e74c3c;
+}
+
+.org-node i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.org-node.director i {
+  font-size: 36px;
+}
+
+.org-connector {
+  height: 40px;
+  width: 2px;
+  background: #ddd;
+  margin: 0 auto;
+  position: relative;
+}
+
+.org-connector:after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: #ddd;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.org-connector-2 {
+  height: 40px;
+  width: 2px;
+  background: #ddd;
+  margin: 0 auto;
+  position: relative;
+}
+
+.org-column {
+  background: white;
+  border-radius: 8px;
+  margin: 0 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  width: 280px;
+  transition: all 0.3s ease;
+}
+
+.org-column:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.org-column-header {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px 8px 0 0;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.org-column-header i {
+  font-size: 24px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.org-list {
+  list-style: none;
+  padding: 15px;
+  margin: 0;
+}
+
+.org-list li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+  display: flex;
+  align-items: center;
+}
+
+.org-list li:last-child {
+  border-bottom: none;
+}
+
+.org-list li i {
+  margin-right: 10px;
+  color: #7f8c8d;
+  font-size: 14px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .org-level-3, .org-level-4, .org-level-5 {
+    flex-wrap: wrap;
+  }
+  
+  .org-column {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .org-level-2 {
+    flex-wrap: wrap;
+  }
+  
+  .org-node {
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .org-connector:after {
+    display: none;
+  }
+}
+</style>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <i class="fas fa-lightbulb me-2"></i>Pôles Innovation
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Veille technologique</strong> - Surveillance des tendances émergentes</li>
+                            <li class="list-group-item"><strong>POC / MVP</strong> - Preuves de concept et produits minimum viables</li>
+                            <li class="list-group-item"><strong>Innovation ouverte</strong> - Collaboration avec startups et universités</li>
+                            <li class="list-group-item"><strong>Lab IA / RPA / Blockchain / IoT</strong> - Expérimentation des nouvelles technologies</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <i class="fas fa-handshake me-2"></i>Gestion des fournisseurs
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Achats IT / SaaS</strong> - Gestion stratégique des acquisitions</li>
+                            <li class="list-group-item"><strong>Pilotage contrats</strong> - Suivi des engagements contractuels</li>
+                            <li class="list-group-item"><strong>Relations prestataires</strong> - Management des partenariats</li>
+                            <li class="list-group-item"><strong>Suivi SLA / KPI / coûts</strong> - Mesure de la performance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-table me-2"></i>Tableau de synthèse des pôles
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Pôle</th>
+                                        <th>Responsabilités clés</th>
+                                        <th>Indicateurs</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Gouvernance SI (Office)</td>
+                                        <td>Schéma directeur, PMO, budget, stratégie SI</td>
+                                        <td>Alignement stratégique, ROI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CTO / Tech</td>
+                                        <td>Infra, DevOps, supervision, automatisation</td>
+                                        <td>SLA, MTTR, Taux de disponibilité</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CISO / Sécurité</td>
+                                        <td>Politique SSI, conformité, gestion incidents</td>
+                                        <td>Score maturité SSI, incidents</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Développement Applicatif</td>
+                                        <td>Dev Agile, UX, TDD, DevSecOps, APIs</td>
+                                        <td>Time to market, qualité code</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data / IA</td>
+                                        <td>Gouvernance données, IA, BI, qualité, éthique</td>
+                                        <td>Data quality, usage IA</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Support / Production</td>
+                                        <td>Helpdesk, SRE, ITSM, supervision</td>
+                                        <td>Satisfaction, temps de réponse</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Innovation</td>
+                                        <td>Veille, prototypage, partenariat, Open Innovation</td>
+                                        <td>Nbr de POC, innovation adoptée</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Relations Métiers</td>
+                                        <td>BRM, collecte besoins, priorisation, satisfaction métiers</td>
+                                        <td>NPS interne, demandes traitées</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bonnes Pratiques Section -->
+    <section class="container mb-5" id="bonnes-pratiques">
+        <h2 class="section-title text-center">Top 20 des Bonnes Pratiques</h2>
+        
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fas fa-check-circle me-2"></i>Les meilleures pratiques pour une DSI performante
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">1</span> Alignement IT-Métier</h5>
+                                    <p>Mise en place de tableaux de bord métiers/IT communs et comités d'alignement réguliers.</p>
+                                    <small class="text-muted">Référence: CIGREF, COBIT</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">2</span> Gouvernance intégrée</h5>
+                                    <p>Utilisation de COBIT pour définir les rôles, processus et contrôles avec un RACI clair.</p>
+                                    <small class="text-muted">Référence: COBIT 2019</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">3</span> Sécurité by design</h5>
+                                    <p>Intégration des exigences sécurité dès la conception des services (ISO 27001, RGPD).</p>
+                                    <small class="text-muted">Référence: ISO/IEC 27001</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">4</span> Architecture urbanisée</h5>
+                                    <p>Optimisation des systèmes pour l'agilité avec TOGAF et eECC.</p>
+                                    <small class="text-muted">Référence: TOGAF, eECC</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">5</span> Bimodal IT</h5>
+                                    <p>Gérer séparément les opérations stables (Run) et projets innovants (Grow/Transform).</p>
+                                    <small class="text-muted">Référence: Gartner</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">6</span> Business Relationship Management</h5>
+                                    <p>Désigner des BRM par direction métier pour fluidifier la communication.</p>
+                                    <small class="text-muted">Référence: CIGREF</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">7</span> DevOps et CI/CD</h5>
+                                    <p>Automatisation des pipelines de déploiement avec intégration continue.</p>
+                                    <small class="text-muted">Référence: ITIL v4</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">8</span> Gouvernance des données</h5>
+                                    <p>Nommer un CDO et mettre en place une stratégie Data-Driven.</p>
+                                    <small class="text-muted">Référence: COBIT, CIGREF</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">9</span> Lab innovation</h5>
+                                    <p>Création d'un espace dédié aux POC et à l'expérimentation.</p>
+                                    <small class="text-muted">Référence: Gartner, eECC</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">10</span> Supervision centralisée</h5>
+                                    <p>Mise en place d'un SOC avec SIEM pour une surveillance 24/7.</p>
+                                    <small class="text-muted">Référence: ISO 27001</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">11</span> Cloud hybride</h5>
+                                    <p>Stratégie de migration progressive vers le cloud avec conteneurs.</p>
+                                    <small class="text-muted">Référence: Gartner</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">12</span> Gestion des fournisseurs</h5>
+                                    <p>Suivi rigoureux des SLA et KPI avec tableau de bord unifié.</p>
+                                    <small class="text-muted">Référence: ITIL v4</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">13</span> Urbanisation SI</h5>
+                                    <p>Cartographie dynamique des applications et API management.</p>
+                                    <small class="text-muted">Référence: TOGAF</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">14</span> Site Reliability Engineering</h5>
+                                    <p>Approche SRE pour améliorer la fiabilité des systèmes.</p>
+                                    <small class="text-muted">Référence: Google SRE</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">15</span> Automatisation des opérations</h5>
+                                    <p>Scripting des tâches répétitives avec Ansible/Puppet.</p>
+                                    <small class="text-muted">Référence: DevOps</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">16</span> Gestion des identités</h5>
+                                    <p>Solution IAM avec MFA et Zero Trust Network Access.</p>
+                                    <small class="text-muted">Référence: ISO 27001</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">17</span> Plan de continuité</h5>
+                                    <p>PRA/PCA testés régulièrement avec scénarios réalistes.</p>
+                                    <small class="text-muted">Référence: ISO 22301</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">18</span> Méthodes agiles</h5>
+                                    <p>Adoption de Scrum/SAFe pour les projets de développement.</p>
+                                    <small class="text-muted">Référence: Agile Manifesto</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">19</span> Qualité logicielle</h5>
+                                    <p>Tests automatisés et revues de code avec SonarQube.</p>
+                                    <small class="text-muted">Référence: DevSecOps</small>
+                                </div>
+                                <div class="best-practice">
+                                    <h5><span class="badge bg-primary me-2">20</span> Tableau de bord unifié</h5>
+                                    <p>Visualisation des KPI métiers et techniques en temps réel.</p>
+                                    <small class="text-muted">Référence: COBIT DS02</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mauvaises Pratiques Section -->
+    <section class="container mb-5" id="mauvaises-pratiques">
+        <h2 class="section-title text-center">Top 20 des Mauvaises Pratiques</h2>
+        
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <i class="fas fa-times-circle me-2"></i>Pièges à éviter absolument
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="bad-practice">
+                                    <h5><span class="badge bg-danger me-2">1</span> DSI cloisonnée</h5>
+                                    <p>Fonction perçue comme purement technique sans lien avec la stratégie métier.</p>
+                                    <small class="text-muted">Impact: Désalignement stratégique</small>
+                                </div>
+                                <div class="bad-practice">
+                                    <h5><span class="badge bg-danger me-2">2</span> Architecture monolithique</h5>
+                                    <p>Systèmes rigides empêchant l'évolution et l'intégration de nouvelles technologies.</p>
+                                    <small class="text-muted">Impact: Dette technique élevée</small>
+                                </div>
+                                <div class="bad-practice">
+                                    <h5><span class="badge bg-danger me-2">3</span> Sécurité réactive</h5>
+                                    <p>Approche "patch and pray" au lieu d'une intégration dès la conception.</p>
+                                    <small class="text-muted">Impact: Vulnérabilités critiques</small>
+                                </div>
+                                <div class="bad-practice">
+                                    <h5><span class="badge bg-danger me-2">4</span> Absence de gouvernance</h5>
+                                    <p>Décisions informelles sans cadre structuré ni indicateurs de performance.</p>
+                                    <small class="text-muted">Impact: Chaos organisationnel</small>
+                                </div>
+                                                            <div class="bad-practice">
+                                <h5><span class="badge bg-danger me-2">20</span> Innovation isolée</h5>
+                                <p>POCs non industrialisés et déconnectés des besoins métiers.</p>
+                                <small class="text-muted">Impact: Ressources gaspillées</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Cas Pratiques Section -->
+<section class="container mb-5" id="cas-pratiques">
+    <h2 class="section-title text-center">Cas Pratiques & Applications</h2>
+    
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <ul class="nav nav-tabs" id="casTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="cloud-tab" data-bs-toggle="tab" data-bs-target="#cloud" type="button" role="tab">Cloud</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data" type="button" role="tab">Données</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button" role="tab">Cybersécurité</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="devops-tab" data-bs-toggle="tab" data-bs-target="#devops" type="button" role="tab">DevOps</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="innovation-tab" data-bs-toggle="tab" data-bs-target="#innovation" type="button" role="tab">Innovation</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="casTabsContent">
+                <div class="tab-pane fade show active" id="cloud" role="tabpanel">
+                    <h4 class="mt-3">Migration vers Kubernetes avec monitoring Prometheus</h4>
+                    <p><strong>Contexte :</strong> Modernisation de l'infrastructure pour améliorer la scalabilité et réduire les coûts.</p>
+                    <p><strong>Solution :</strong></p>
+                    <ul>
+                        <li>Containerisation des applications legacy</li>
+                        <li>Mise en place d'un cluster Kubernetes avec autoscaling</li>
+                        <li>Intégration de Prometheus et Grafana pour le monitoring</li>
+                        <li>Formation des équipes sur les nouvelles technologies</li>
+                    </ul>
+                    <p><strong>Résultats :</strong></p>
+                    <ul>
+                        <li>+40% de performance des applications</li>
+                        <li>-30% de coûts d'infrastructure</li>
+                        <li>Déploiements réduits de 2h à 15 minutes</li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="data" role="tabpanel">
+                    <h4 class="mt-3">DataLake centralisé + Talend pour qualité des données</h4>
+                    <p><strong>Contexte :</strong> Données dispersées dans plusieurs silos avec des problèmes de qualité.</p>
+                    <p><strong>Solution :</strong></p>
+                    <ul>
+                        <li>Implémentation d'un DataLake sur Azure Data Lake Storage</li>
+                        <li>Utilisation de Talend pour l'intégration et la qualité des données</li>
+                        <li>Mise en place de métadonnées et d'un catalogue de données</li>
+                        <li>Formation des utilisateurs métiers sur les outils de BI</li>
+                    </ul>
+                    <p><strong>Résultats :</strong></p>
+                    <ul>
+                        <li>90% des données maintenant accessibles en self-service</li>
+                        <li>Réduction de 75% des erreurs dans les rapports</li>
+                        <li>Délai d'accès aux données réduit de 3 jours à 2 heures</li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="security" role="tabpanel">
+                    <h4 class="mt-3">Centre SOC intégré avec Azure Sentinel + IAM Keycloak</h4>
+                    <p><strong>Contexte :</strong> Augmentation des cyberattaques et besoin de conformité RGPD.</p>
+                    <p><strong>Solution :</strong></p>
+                    <ul>
+                        <li>Déploiement d'Azure Sentinel pour la détection des menaces</li>
+                        <li>Mise en place de Keycloak pour la gestion centralisée des identités</li>
+                        <li>Implémentation de MFA (Multi-Factor Authentication)</li>
+                        <li>Campagnes de sensibilisation pour les employés</li>
+                    </ul>
+                    <p><strong>Résultats :</strong></p>
+                    <ul>
+                        <li>Détection des incidents réduite de 48h à 15 minutes</li>
+                        <li>95% des employés formés aux bonnes pratiques</li>
+                        <li>Conformité RGPD atteinte avec succès</li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="devops" role="tabpanel">
+                    <h4 class="mt-3">Pipeline CI/CD GitLab, automatisation Ansible + tests SonarQube</h4>
+                    <p><strong>Contexte :</strong> Processus de déploiement manuel et sujet aux erreurs.</p>
+                    <p><strong>Solution :</strong></p>
+                    <ul>
+                        <li>Mise en place d'un pipeline CI/CD avec GitLab</li>
+                        <li>Automatisation des déploiements avec Ansible</li>
+                        <li>Intégration de SonarQube pour l'analyse statique du code</li>
+                        <li>Formation des équipes aux pratiques DevOps</li>
+                    </ul>
+                    <p><strong>Résultats :</strong></p>
+                    <ul>
+                        <li>Fréquence de déploiement passée de 1/mois à 10/jour</li>
+                        <li>Réduction de 80% des bugs en production</li>
+                        <li>Économie de 300h/mois sur les déploiements</li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="innovation" role="tabpanel">
+                    <h4 class="mt-3">POC RPA UiPath + chatbot RH intelligent (NLP)</h4>
+                    <p><strong>Contexte :</strong> Processus RH répétitifs et besoin d'améliorer l'expérience employé.</p>
+                    <p><strong>Solution :</strong></p>
+                    <ul>
+                        <li>Automatisation des processus RH avec UiPath</li>
+                        <li>Développement d'un chatbot avec NLP pour répondre aux FAQs</li>
+                        <li>Intégration avec l'ERP RH existant</li>
+                        <li>Tests utilisateurs itératifs</li>
+                    </ul>
+                    <p><strong>Résultats :</strong></p>
+                    <ul>
+                        <li>Réduction de 60% du temps consacré aux tâches administratives</li>
+                        <li>Chatbot répond à 85% des questions sans intervention humaine</li>
+                        <li>ROI atteint en 6 mois</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-table me-2"></i>Tableau des cas d'application
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Domaine</th>
+                                    <th>Exemple Concret</th>
+                                    <th>Technologies</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cloud</td>
+                                    <td>Migration vers Kubernetes avec monitoring Prometheus</td>
+                                    <td>K8s, Prometheus, Grafana</td>
+                                </tr>
+                                <tr>
+                                    <td>Données</td>
+                                    <td>DataLake centralisé + Talend pour qualité des données</td>
+                                    <td>Azure Data Lake, Talend</td>
+                                </tr>
+                                <tr>
+                                    <td>Cybersécurité</td>
+                                    <td>Centre SOC intégré avec Azure Sentinel + IAM Keycloak</td>
+                                    <td>Azure Sentinel, Keycloak</td>
+                                </tr>
+                                <tr>
+                                    <td>DevOps</td>
+                                    <td>Pipeline CI/CD GitLab, automatisation Ansible + tests SonarQube</td>
+                                    <td>GitLab, Ansible, SonarQube</td>
+                                </tr>
+                                <tr>
+                                    <td>Innovation</td>
+                                    <td>POC RPA UiPath + chatbot RH intelligent (NLP)</td>
+                                    <td>UiPath, NLP, Chatbot</td>
+                                </tr>
+                                <tr>
+                                    <td>Méthodologie</td>
+                                    <td>Adoption de SAFe pour projets multi-équipes</td>
+                                    <td>SAFe, Agile</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Références Section -->
+<section class="container mb-5" id="references">
+    <h2 class="section-title text-center">Références Méthodologiques</h2>
+    
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-book me-2"></i>Cadres de référence et normes
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="reference-box">
+                                <h4><i class="fas fa-cube me-2 text-primary"></i>COBIT 2019</h4>
+                                <p>Cadre de gouvernance IT pour aligner les objectifs IT sur les besoins métier, avec contrôle des risques et conformité.</p>
+                                <p><strong>Application :</strong> Gouvernance IT, gestion des risques, alignement stratégique IT-métier</p>
+                            </div>
+                            <div class="reference-box">
+                                <h4><i class="fas fa-chart-line me-2 text-primary"></i>CIGREF</h4>
+                                <p>Référentiel français sur la maturité numérique et le rôle stratégique de la DSI.</p>
+                                <p><strong>Application :</strong> Évaluation de la maturité numérique, alignement IT-métier</p>
+                            </div>
+                            <div class="reference-box">
+                                <h4><i class="fas fa-project-diagram me-2 text-primary"></i>TOGAF</h4>
+                                <p>Cadre méthodologique pour le développement d'architecture d'entreprise.</p>
+                                <p><strong>Application :</strong> Urbanisation SI, modélisation et gouvernance d'architecture</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="reference-box">
+                                <h4><i class="fas fa-shield-alt me-2 text-primary"></i>ISO/IEC 27001</h4>
+                                <p>Norme internationale pour les systèmes de management de la sécurité de l'information.</p>
+                                <p><strong>Application :</strong> Sécurité de l'information, gestion des risques</p>
+                            </div>
+                            <div class="reference-box">
+                                <h4><i class="fas fa-tasks me-2 text-primary"></i>ITIL v4</h4>
+                                <p>Ensemble de bonnes pratiques pour la gestion des services IT.</p>
+                                <p><strong>Application :</strong> Gestion des services IT (ITSM), amélioration continue</p>
+                            </div>
+                            <div class="reference-box">
+                                <h4><i class="fas fa-lightbulb me-2 text-primary"></i>eECC</h4>
+                                <p>Cadre européen d'architecture d'entreprise pour les organisations complexes.</p>
+                                <p><strong>Application :</strong> Transformation numérique, innovation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-lg-10 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-check-double me-2"></i>Recommandations de mise en œuvre
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="best-practice">
+                                <h5><i class="fas fa-check-circle text-success me-2"></i>Prioriser la gouvernance</h5>
+                                <p>Avec les référentiels <strong>COBIT, ITIL, ISO</strong> pour structurer les processus et responsabilités.</p>
+                            </div>
+                            <div class="best-practice">
+                                <h5><i class="fas fa-check-circle text-success me-2"></i>Déployer une organisation Bimodale</h5>
+                                <p>Distinguer clairement l'IT industrielle (Run) et l'IT agile (Grow/Transform).</p>
+                            </div>
+                            <div class="best-practice">
+                                <h5><i class="fas fa-check-circle text-success me-2"></i>Instaurer des BRM</h5>
+                                <p><strong>Business Relationship Managers</strong> pour fluidifier la relation IT/métier.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="best-practice">
+                                <h5><i class="fas fa-check-circle text-success me-2"></i>Intégrer la cybersécurité</h5>
+                                <p><strong>Security by Design</strong> dans tous les projets dès la conception.</p>
+                            </div>
+                            <div class="best-practice">
+                                <h5><i class="fas fa-check-circle text-success me-2"></i>Converger les modèles</h5>
+                                <p>Combiner <strong>ITSM + DevOps + Agile + Data</strong> pour une approche unifiée.</p>
+                            </div>
+                            <div class="best-practice">
+                                <h5><i class="fas fa-check-circle text-success me-2"></i>Mettre en place des KPI</h5>
+                                <p>Indicateurs <strong>métiers et techniques</strong> pour chaque pôle.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Conclusion Section -->
+<section class="container mb-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <i class="fas fa-graduation-cap me-2"></i>Conclusion
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Les clés d'une DSI moderne</h4>
+                    <p class="card-text">Un bon organigramme DSI <strong>n'est pas figé</strong> : il doit refléter la stratégie de l'organisation, renforcer la résilience numérique, accélérer l'innovation et garantir la satisfaction des métiers.</p>
+                    <p>En adoptant une structure <strong>modulaire, orientée gouvernance, valeur et sécurité</strong>, la DSI devient un véritable levier de performance et de transformation.</p>
+                    
+                    <div class="mt-4">
+                        <h5>Une DSI moderne se bâtit sur :</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Une <strong>organisation claire</strong> avec des rôles bien définis</li>
+                            <li class="list-group-item">Une <strong>gouvernance forte</strong> s'appuyant sur COBIT et CIGREF</li>
+                            <li class="list-group-item">Une <strong>architecture maîtrisée</strong> selon eECC et TOGAF</li>
+                            <li class="list-group-item">Une <strong>agilité et innovation</strong> pilotées via les bonnes pratiques Gartner</li>
+                            <li class="list-group-item">Une <strong>culture de la sécurité et conformité</strong> intégrée dès la conception</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert alert-success mt-4">
+                        <h5><i class="fas fa-check-circle me-2"></i>Cette démarche garantit :</h5>
+                        <ul>
+                            <li>La <strong>création de valeur durable</strong></li>
+                            <li>La <strong>maîtrise des risques</strong></li>
+                            <li>Une <strong>capacité d'adaptation rapide</strong> face aux évolutions technologiques et métier</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="mb-4">Guide Stratégique de la DSI Moderne</h3>
+                <p class="mb-4">Transformation numérique, gouvernance IT et création de valeur</p>
+                <ul class="list-inline mb-4">
+                    <li class="list-inline-item"><a href="#introduction" class="text-white">Introduction</a></li>
+                    <li class="list-inline-item"><a href="#organisation" class="text-white">Organisation</a></li>
+                    <li class="list-inline-item"><a href="#bonnes-pratiques" class="text-white">Bonnes Pratiques</a></li>
+                    <li class="list-inline-item"><a href="#mauvaises-pratiques" class="text-white">Mauvaises Pratiques</a></li>
+                    <li class="list-inline-item"><a href="#cas-pratiques" class="text-white">Cas Pratiques</a></li>
+                    <li class="list-inline-item"><a href="#references" class="text-white">Références</a></li>
+                </ul>
+                <p class="small mb-0">© 2023 Guide DSI Moderne - Tous droits réservés</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top Button -->
+<a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('active');
+        } else {
+            backToTopButton.classList.remove('active');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
+        });
+    });
+    
+    // Update active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
