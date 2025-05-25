@@ -923,51 +923,428 @@
                         <p class="card-text">Explorez ces ressources pour approfondir votre compréhension et améliorer la maturité de votre DSI.</p>
                         
                         <div class="row mt-4">
-                            <!-- Best Practices -->
-                            <div class="col-md-6">
-                                <h4><i class="fas fa-check-circle text-success me-2"></i>Bonnes Pratiques</h4>
-                                
-                                <div class="best-practice-card">
-                                    <h5>ITIL 4 pour la gestion des services</h5>
-                                    <p>Cadre complet pour la gestion des services IT avec des processus éprouvés.</p>
-                                    <a href="#" class="btn btn-sm btn-outline-success">En savoir plus</a>
-                                </div>
-                                
-                                <div class="best-practice-card">
-                                    <h5>COBIT pour la gouvernance IT</h5>
-                                    <p>Cadre de gouvernance et de management des technologies de l'information.</p>
-                                    <a href="#" class="btn btn-sm btn-outline-success">En savoir plus</a>
-                                </div>
-                                
-                                <div class="best-practice-card">
-                                    <h5>DevOps et SRE</h5>
-                                    <p>Méthodologies pour améliorer la collaboration et la fiabilité des systèmes.</p>
-                                    <a href="#" class="btn btn-sm btn-outline-success">En savoir plus</a>
-                                </div>
-                            </div>
-                            
-                            <!-- Case Studies -->
-                            <div class="col-md-6">
-                                <h4><i class="fas fa-building text-primary me-2"></i>Cas Pratiques & RETEX</h4>
-                                
-                                <div class="case-study-card">
-                                    <h5>Transformation digitale d'une banque</h5>
-                                    <p>Comment une grande banque a modernisé son infrastructure et ses processus.</p>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Voir l'étude</a>
-                                </div>
-                                
-                                <div class="case-study-card">
-                                    <h5>Mise en place d'un ITSM</h5>
-                                    <p>Retour d'expérience sur l'implémentation de ServiceNow dans une PME.</p>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Voir l'étude</a>
-                                </div>
-                                
-                                <div class="case-study-card">
-                                    <h5>Migration vers le Cloud</h5>
-                                    <p>Stratégie et leçons apprises lors d'une migration Azure complète.</p>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Voir l'étude</a>
-                                </div>
-                            </div>
+                         
+						 <!-- Best Practices -->
+							<div class="col-md-6">
+								<h4><i class="fas fa-check-circle text-success me-2"></i>Bonnes Pratiques</h4>
+								
+								<!-- ITIL 4 -->
+								<div class="best-practice-card">
+									<h5>ITIL 4 pour la gestion des services</h5>
+									<p>Cadre complet pour la gestion des services IT avec des processus éprouvés.</p>
+									<button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#itilModal">
+										En savoir plus
+									</button>
+								</div>
+								
+								<!-- COBIT -->
+								<div class="best-practice-card">
+									<h5>COBIT pour la gouvernance IT</h5>
+									<p>Cadre de gouvernance et de management des technologies de l'information.</p>
+									<button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#cobitModal">
+										En savoir plus
+									</button>
+								</div>
+								
+								<!-- DevOps -->
+								<div class="best-practice-card">
+									<h5>DevOps et SRE</h5>
+									<p>Méthodologies pour améliorer la collaboration et la fiabilité des systèmes.</p>
+									<button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#devopsModal">
+										En savoir plus
+									</button>
+								</div>
+							</div>
+
+							<!-- Case Studies -->
+							<div class="col-md-6">
+								<h4><i class="fas fa-building text-primary me-2"></i>Cas Pratiques & RETEX</h4>
+								
+								<!-- Banque -->
+								<div class="case-study-card">
+									<h5>Transformation digitale d'une banque</h5>
+									<p>Comment une grande banque a modernisé son infrastructure et ses processus.</p>
+									<button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#banqueModal">
+										Voir l'étude
+									</button>
+								</div>
+								
+								<!-- ITSM -->
+								<div class="case-study-card">
+									<h5>Mise en place d'un ITSM</h5>
+									<p>Retour d'expérience sur l'implémentation de ServiceNow dans une PME.</p>
+									<button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#itsmModal">
+										Voir l'étude
+									</button>
+								</div>
+								
+								<!-- Cloud -->
+								<div class="case-study-card">
+									<h5>Migration vers le Cloud</h5>
+									<p>Stratégie et leçons apprises lors d'une migration Azure complète.</p>
+									<button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#cloudModal">
+										Voir l'étude
+									</button>
+								</div>
+							</div>
+
+							<!-- Modals Section -->
+							<!-- ITIL Modal -->
+							<div class="modal fade" id="itilModal" tabindex="-1" aria-labelledby="itilModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header bg-success text-white">
+											<h5 class="modal-title" id="itilModalLabel">ITIL 4 - Best Practices</h5>
+											<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<h4>ITIL 4 Framework</h4>
+											<p>ITIL 4 est le cadre de référence pour la gestion des services informatiques. Il fournit des bonnes pratiques pour aligner les services IT sur les besoins métiers.</p>
+											
+											<h5 class="mt-4">Principaux composants :</h5>
+											<ul>
+												<li>Service Value System (SVS)</li>
+												<li>34 pratiques de gestion</li>
+												<li>4 dimensions du service management</li>
+												<li>Guiding Principles</li>
+											</ul>
+											
+											<div class="alert alert-info mt-3">
+												<i class="fas fa-info-circle me-2"></i>
+												<strong>Ressource :</strong> 
+												<a href="https://www.axelos.com/best-practice-solutions/itil" target="_blank">Site officiel ITIL</a>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+											<a href="https://www.axelos.com/best-practice-solutions/itil" target="_blank" class="btn btn-success">
+												<i class="fas fa-external-link-alt me-1"></i> Visiter le site
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- COBIT Modal -->
+							<div class="modal fade" id="cobitModal" tabindex="-1" aria-labelledby="cobitModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header bg-success text-white">
+											<h5 class="modal-title" id="cobitModalLabel">COBIT 2019 - Gouvernance IT</h5>
+											<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<h4>COBIT 2019 Framework</h4>
+											<p>COBIT est un cadre de gouvernance et de management des technologies de l'information créé par ISACA.</p>
+											
+											<h5 class="mt-4">Avantages clés :</h5>
+											<ul>
+												<li>Alignement stratégique IT-Métier</li>
+												<li>Gestion des risques et conformité</li>
+												<li>Optimisation des ressources IT</li>
+												<li>Mesure de la performance</li>
+											</ul>
+											
+											<div class="row mt-3">
+												<div class="col-md-6">
+													<div class="card">
+														<div class="card-body">
+															<h5><i class="fas fa-book me-2"></i>Ressources</h5>
+															<a href="https://www.isaca.org/resources/cobit" target="_blank" class="d-block mb-2">Documentation officielle</a>
+															<a href="https://www.isaca.org/resources/cobit" target="_blank" class="d-block mb-2">Guides d'implémentation</a>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="card">
+														<div class="card-body">
+															<h5><i class="fas fa-certificate me-2"></i>Certifications</h5>
+															<p>COBIT propose plusieurs niveaux de certification pour les professionnels IT.</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+											<a href="https://www.isaca.org/resources/cobit" target="_blank" class="btn btn-success">
+												<i class="fas fa-external-link-alt me-1"></i> En savoir plus
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- DevOps Modal -->
+							<div class="modal fade" id="devopsModal" tabindex="-1" aria-labelledby="devopsModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header bg-success text-white">
+											<h5 class="modal-title" id="devopsModalLabel">DevOps & SRE</h5>
+											<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<h4>Méthodologies DevOps et SRE</h4>
+											<p>Approches modernes pour améliorer la collaboration entre développement et opérations.</p>
+											
+											<div class="row mt-3">
+												<div class="col-md-6">
+													<div class="card h-100">
+														<div class="card-header bg-light">
+															<h5><i class="fas fa-random me-2"></i>DevOps</h5>
+														</div>
+														<div class="card-body">
+															<ul>
+																<li>Intégration continue/Déploiement continu (CI/CD)</li>
+																<li>Infrastructure as Code</li>
+																<li>Monitoring et observabilité</li>
+																<li>Culture de collaboration</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="card h-100">
+														<div class="card-header bg-light">
+															<h5><i class="fas fa-server me-2"></i>SRE</h5>
+														</div>
+														<div class="card-body">
+															<ul>
+																<li>Engineering plutôt qu'operations</li>
+																<li>SLIs, SLOs et SLAs</li>
+																<li>Toil reduction</li>
+																<li>Error budgets</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="alert alert-warning mt-3">
+												<i class="fas fa-lightbulb me-2"></i>
+												<strong>Conseil :</strong> Commencez par implémenter des pipelines CI/CD avant d'adopter les pratiques SRE avancées.
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+											<div class="btn-group">
+												<a href="https://cloud.google.com/devops" target="_blank" class="btn btn-success">
+													<i class="fab fa-google me-1"></i> Google DevOps
+												</a>
+												<a href="https://sre.google/" target="_blank" class="btn btn-success">
+													<i class="fas fa-book me-1"></i> Google SRE
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Banque Modal -->
+							<div class="modal fade" id="banqueModal" tabindex="-1" aria-labelledby="banqueModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header bg-primary text-white">
+											<h5 class="modal-title" id="banqueModalLabel">Transformation digitale bancaire</h5>
+											<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<h4>Cas pratique : Banque Européenne</h4>
+											<p class="lead">Modernisation complète de l'infrastructure IT sur 3 ans.</p>
+											
+											<div class="row">
+												<div class="col-md-6">
+													<h5><i class="fas fa-trophy me-2"></i>Résultats</h5>
+													<ul>
+														<li>+40% de vitesse de déploiement</li>
+														<li>-30% de coûts d'infrastructure</li>
+														<li>99.99% de disponibilité</li>
+													</ul>
+												</div>
+												<div class="col-md-6">
+													<h5><i class="fas fa-tools me-2"></i>Technologies</h5>
+													<ul>
+														<li>Microservices architecture</li>
+														<li>Kubernetes et Docker</li>
+														<li>API Gateway</li>
+													</ul>
+												</div>
+											</div>
+											
+											<div class="card mt-3">
+												<div class="card-header">
+													<h5><i class="fas fa-chart-line me-2"></i>Timeline du projet</h5>
+												</div>
+												<div class="card-body">
+													<ol>
+														<li><strong>Phase 1 (6 mois):</strong> Audit et stratégie</li>
+														<li><strong>Phase 2 (12 mois):</strong> Modernisation du core banking</li>
+														<li><strong>Phase 3 (18 mois):</strong> Digital channels et analytics</li>
+													</ol>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+											<button type="button" class="btn btn-primary">
+												<i class="fas fa-download me-1"></i> Télécharger l'étude complète
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- ITSM Modal -->
+							<div class="modal fade" id="itsmModal" tabindex="-1" aria-labelledby="itsmModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header bg-primary text-white">
+											<h5 class="modal-title" id="itsmModalLabel">Implémentation ITSM</h5>
+											<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<h4>Retour d'expérience : ServiceNow en PME</h4>
+											<div class="alert alert-info">
+												<i class="fas fa-info-circle me-2"></i>
+												<strong>Contexte :</strong> PME de 250 employés dans le secteur manufacturier
+											</div>
+											
+											<h5 class="mt-3"><i class="fas fa-check-circle text-success me-2"></i>Succès</h5>
+											<ul>
+												<li>Standardisation des processus IT</li>
+												<li>Meilleure visibilité des demandes</li>
+												<li>Réduction des temps de résolution</li>
+											</ul>
+											
+											<h5 class="mt-3"><i class="fas fa-exclamation-triangle text-warning me-2"></i>Défis</h5>
+											<ul>
+												<li>Résistance au changement</li>
+												<li>Configuration initiale complexe</li>
+												<li>Nécessité de formation intensive</li>
+											</ul>
+											
+											<div class="card mt-3">
+												<div class="card-header">
+													<h5><i class="fas fa-euro-sign me-2"></i>Coûts</h5>
+												</div>
+												<div class="card-body">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>Poste</th>
+																<th>Coût</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>Licences (3 ans)</td>
+																<td>45 000€</td>
+															</tr>
+															<tr>
+																<td>Implémentation</td>
+																<td>25 000€</td>
+															</tr>
+															<tr>
+																<td>Formation</td>
+																<td>10 000€</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+											<button type="button" class="btn btn-primary">
+												<i class="fas fa-user me-1"></i> Contacter l'équipe projet
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Cloud Modal -->
+							<div class="modal fade" id="cloudModal" tabindex="-1" aria-labelledby="cloudModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header bg-primary text-white">
+											<h5 class="modal-title" id="cloudModalLabel">Migration Azure</h5>
+											<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<h4>Stratégie de migration cloud</h4>
+											<p>Approche en 5 phases pour une migration réussie vers Microsoft Azure.</p>
+											
+											<div class="row mt-3">
+												<div class="col-md-4">
+													<div class="card h-100">
+														<div class="card-body text-center">
+															<div class="display-4 text-primary">1</div>
+															<h5>Évaluation</h5>
+															<p>Analyse de l'existant et plan de migration</p>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="card h-100">
+														<div class="card-body text-center">
+															<div class="display-4 text-primary">2</div>
+															<h5>Proof of Concept</h5>
+															<p>Migration test de charges critiques</p>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<div class="card h-100">
+														<div class="card-body text-center">
+															<div class="display-4 text-primary">3</div>
+															<h5>Migration</h5>
+															<p>Déplacement progressif des workloads</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="row mt-3">
+												<div class="col-md-6">
+													<div class="card h-100">
+														<div class="card-body text-center">
+															<div class="display-4 text-primary">4</div>
+															<h5>Optimisation</h5>
+															<p>Réglage des performances et coûts</p>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="card h-100">
+														<div class="card-body text-center">
+															<div class="display-4 text-primary">5</div>
+															<h5>Opérations</h5>
+															<p>Gestion et monitoring continu</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											
+											<div class="alert alert-success mt-3">
+												<i class="fas fa-check-circle me-2"></i>
+												<strong>Résultat :</strong> 60% de réduction des coûts d'infrastructure après 18 mois
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+											<div class="btn-group">
+												<button type="button" class="btn btn-primary">
+													<i class="fas fa-file-download me-1"></i> Checklist
+												</button>
+												<button type="button" class="btn btn-primary">
+													<i class="fas fa-video me-1"></i> Vidéo
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
                             
                             <!-- References -->
                             <div class="col-12 mt-4">
@@ -1903,22 +2280,93 @@
             }
             
             // Export to PDF
-            document.getElementById('exportPDF').addEventListener('click', function() {
-                alert('Fonctionnalité d\'export PDF sera implémentée ici');
-                /*
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                
-                // Add title
-                doc.text('Rapport de Maturité DSI', 10, 10);
-                
-                // Add content
-                // You would need to use html2canvas to capture the report section
-                // and add it to the PDF
-                
-                doc.save('rapport-maturite-dsi.pdf');
-                */
-            });
+       // Export to PDF
+document.getElementById('exportPDF').addEventListener('click', function() {
+    // Afficher un indicateur de chargement
+    const exportBtn = this;
+    exportBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Génération du PDF...';
+    exportBtn.disabled = true;
+
+    // Configuration du PDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+    });
+
+    // Options pour html2canvas
+    const options = {
+        scale: 2, // Augmente la qualité
+        useCORS: true, // Permet le chargement des images externes
+        scrollY: 0, // Désactive le défilement
+        allowTaint: true,
+        logging: false // Désactive les logs
+    };
+
+    // Capture du rapport
+    const element = document.getElementById('report');
+    
+    // Ajouter la date et le titre
+    const date = new Date().toLocaleDateString('fr-FR');
+    let yPosition = 10;
+    
+    doc.setFontSize(20);
+    doc.setTextColor(40);
+    doc.text('Rapport de Maturité DSI', 105, yPosition, { align: 'center' });
+    yPosition += 10;
+    
+    doc.setFontSize(12);
+    doc.text(`Généré le ${date}`, 105, yPosition, { align: 'center' });
+    yPosition += 15;
+
+    // Générer le PDF en plusieurs pages si nécessaire
+    html2canvas(element, options).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = 190; // Largeur A4 en mm
+        const pageHeight = 277; // Hauteur A4 en mm
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        
+        let heightLeft = imgHeight;
+        let position = yPosition;
+        
+        // Première page
+        doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight - position - 20; // Réserve pour le pied de page
+        
+        // Pages supplémentaires si nécessaire
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            doc.addPage();
+            doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+
+        // Pied de page
+        const pageCount = doc.internal.getNumberOfPages();
+        for(let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFontSize(10);
+            doc.setTextColor(150);
+            doc.text(`Page ${i}/${pageCount}`, 105, 287, { align: 'center' });
+            doc.text('© Evaluation Maturité DSI', 105, 290, { align: 'center' });
+        }
+
+        // Sauvegarder le PDF
+        doc.save(`rapport-maturite-dsi-${date.replace(/\//g, '-')}.pdf`);
+        
+        // Réinitialiser le bouton
+        exportBtn.innerHTML = '<i class="fas fa-file-pdf me-2"></i>Exporter en PDF';
+        exportBtn.disabled = false;
+    }).catch(error => {
+        console.error('Erreur lors de la génération du PDF:', error);
+        alert('Une erreur est survenue lors de la génération du PDF');
+        
+        // Réinitialiser le bouton en cas d'erreur
+        exportBtn.innerHTML = '<i class="fas fa-file-pdf me-2"></i>Exporter en PDF';
+        exportBtn.disabled = false;
+    });
+});
             
             // Export to PowerPoint
             document.getElementById('exportPPT').addEventListener('click', function() {
