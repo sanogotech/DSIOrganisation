@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation de Maturité DSI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-title i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .option-card {
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            background-color: var(--light-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid #ddd;
+        }
+        
+        .option-card:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .option-card.selected {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        .option-emoji {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        .option-text {
+            font-weight: 500;
+        }
+        
+        .option-explanation {
+            display: none;
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .btn-submit {
+            background-color: var(--success-color);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            margin: 2rem 0;
+        }
+        
+        .btn-submit:hover {
+            background-color: #219653;
+        }
+        
+        .result-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .result-level {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .progress {
+            height: 20px;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+        }
+        
+        .progress-bar {
+            background-color: var(--secondary-color);
+        }
+        
+        .category-score {
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .recommendation-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .recommendation-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .norm-reference {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .best-practice {
+            background-color: #e8f4fc;
+            border-left: 4px solid var(--secondary-color);
+            padding: 0.75rem;
+            border-radius: 0 5px 5px 0;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .case-study {
+            background-color: #f0f8f0;
+            border-left: 4px solid var(--success-color);
+            padding: 0.75rem;
+            border-radius: 0 5px 5px 0;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .badge-level {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+        
+        .badge-level-1 {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .badge-level-2 {
+            background-color: #f39c12;
+            color: white;
+        }
+        
+        .badge-level-3 {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .badge-level-4 {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .badge-level-5 {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .download-btn {
+            margin-top: 1rem;
+            margin-right: 0.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--secondary-color);
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .radar-chart-container {
+            height: 400px;
+            margin: 2rem 0;
+        }
+        
+        .maturity-description {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .maturity-features {
+            margin-top: 1.5rem;
+        }
+        
+        .maturity-features ul {
+            padding-left: 1.5rem;
+        }
+        
+        .maturity-features li {
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .question-title {
+                font-size: 1.1rem;
+            }
+            
+            .option-text {
+                font-size: 0.9rem;
+            }
+            
+            .result-level {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <h1><i class="fas fa-chart-line"></i> Évaluation de Maturité de la DSI</h1>
+                    <p class="lead">Identifiez le niveau de maturité de votre Direction des Systèmes d'Information selon 25 niveaux répartis en 8 catégories clés</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div id="quiz-container">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> Pour chaque question, choisissez la réponse la plus représentative de votre situation. Une explication est disponible pour chaque choix.
+                    </div>
+                    
+                    <!-- Question 1 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-bug"></i> 1. Gestion des Incidents et de l'Exploitation
+                        </div>
+                        <p>Comment votre DSI gère-t-elle les incidents ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">😱</span> Aucune gestion structurée
+                            </div>
+                            <div class="option-explanation">
+                                Les incidents sont résolus au cas par cas sans enregistrement ni suivi. Aucune métrique n'est suivie et les problèmes récurrents ne sont pas identifiés.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">📝</span> Liste manuelle et réactive
+                            </div>
+                            <div class="option-explanation">
+                                Les incidents sont notés dans un fichier Excel ou un cahier, mais sans processus formel. Le suivi est réactif et dépend des individus.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">⚙️</span> Processus partiels en place
+                            </div>
+                            <div class="option-explanation">
+                                Certaines procédures existent pour les incidents critiques, mais elles ne sont pas systématiques. Quelques indicateurs sont suivis de manière irrégulière.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🧮</span> Outil ITSM + KPIs
+                            </div>
+                            <div class="option-explanation">
+                                Utilisation d'un outil comme GLPI, ServiceNow ou Jira Service Desk, avec indicateurs suivis (MTTR, nombre d'incidents). Processus documentés mais perfectibles.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🧠</span> ITSM complet + Amélioration continue
+                            </div>
+                            <div class="option-explanation">
+                                Incident Management automatisé avec intégration au monitoring, revues post-mortem systématiques, démarche d'amélioration continue basée sur les données.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-book"></i> 2. Documentation & Processus
+                        </div>
+                        <p>Quel est l'état de votre documentation ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">📦</span> Quasi inexistante
+                            </div>
+                            <div class="option-explanation">
+                                Les savoirs sont détenus oralement ou dans des documents éparpillés. La perte d'un collaborateur clé entraîne une perte de connaissance importante.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">🗒️</span> Dispersée et obsolète
+                            </div>
+                            <div class="option-explanation">
+                                Documentation présente mais rarement à jour ni centralisée. Chacun a ses propres fichiers et versions, ce qui crée de la confusion.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">📚</span> Standardisation en cours
+                            </div>
+                            <div class="option-explanation">
+                                Des processus critiques sont documentés avec une volonté de structuration. Un référentiel unique est en cours de mise en place mais n'est pas encore complet.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🏛️</span> Référentiel vivant
+                            </div>
+                            <div class="option-explanation">
+                                Documentation centralisée dans un wiki ou outil dédié (Confluence, SharePoint), maintenue à jour, utilisée dans les projets et les formations.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🌐</span> Knowledge management
+                            </div>
+                            <div class="option-explanation">
+                                Base de connaissances active avec recherche sémantique, processus de mise à jour continue intégré au workflow, accès transversal et contribution de tous.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-handshake"></i> 3. Alignement IT / Métier
+                        </div>
+                        <p>Quelle est la place de l'IT dans la stratégie de l'entreprise ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">🚫</span> L'IT est isolée
+                            </div>
+                            <div class="option-explanation">
+                                Décisions métiers prises sans implication de la DSI. L'IT est vue comme un centre de coûts et un simple exécutant technique.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">👂</span> IT consultée ponctuellement
+                            </div>
+                            <div class="option-explanation">
+                                Implication réactive de la DSI sur les projets décidés par les métiers. Pas de participation en amont à la définition des besoins.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">🤝</span> Participation régulière
+                            </div>
+                            <div class="option-explanation">
+                                La DSI est présente dans les comités stratégiques et les projets métiers, mais sans rôle moteur. Elle apporte une expertise technique mais ne pilote pas.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🧩</span> Co-construction des feuilles de route
+                            </div>
+                            <div class="option-explanation">
+                                DSI et métiers travaillent ensemble sur les roadmaps. Les priorités IT sont alignées sur les enjeux business et des indicateurs communs sont définis.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🎯</span> Partenaire stratégique
+                            </div>
+                            <div class="option-explanation">
+                                IT est perçue comme créatrice de valeur et acteur de transformation. La DSI initie des projets innovants qui créent un avantage concurrentiel.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-lightbulb"></i> 4. Culture d'Innovation
+                        </div>
+                        <p>L'innovation est-elle encouragée dans votre DSI ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">🚷</span> Aucune place pour l'innovation
+                            </div>
+                            <div class="option-explanation">
+                                Priorité absolue à la production et au run. Aucun budget ni temps alloué pour explorer de nouvelles technologies ou méthodes.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">🧪</span> Petites expérimentations isolées
+                            </div>
+                            <div class="option-explanation">
+                                Quelques projets innovants lancés par des équipes motivées, mais sans cadre formel ni soutien de la direction. Résultats rarement industrialisés.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">💡</span> Cellule innovation en place
+                            </div>
+                            <div class="option-explanation">
+                                Innovation structurée avec budget dédié, processus de sélection et priorisation des idées. Veille technologique organisée mais impact encore limité.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🧬</span> Innovation collaborative
+                            </div>
+                            <div class="option-explanation">
+                                Partenariats avec des startups, hackathons internes, projets pilotes avec les métiers. Méthodes de design thinking utilisées pour co-innover.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🚀</span> Innovation continue & ouverte
+                            </div>
+                            <div class="option-explanation">
+                                Innovation intégrée aux méthodes de travail quotidiennes, culture agile et orientation produit. Expérimentation rapide, échecs acceptés et capitalisés.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-shield-alt"></i> 5. Sécurité et Conformité
+                        </div>
+                        <p>Où en est votre posture de sécurité ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">🧨</span> Risque élevé non traité
+                            </div>
+                            <div class="option-explanation">
+                                Absence de politique de sécurité, mots de passe faibles ou partagés, utilisateurs non formés. Aucun audit ou test de vulnérabilité réalisé.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">🛡️</span> Sensibilisation basique
+                            </div>
+                            <div class="option-explanation">
+                                Quelques formations ou emails de sensibilisation, mais rien de structuré. Politique de sécurité rédigée mais peu appliquée au quotidien.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">🔍</span> Politiques établies
+                            </div>
+                            <div class="option-explanation">
+                                Charte informatique formalisée, politique RGPD mise en œuvre, audit de vulnérabilité occasionnel. Processus de gestion des accès en place.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🔒</span> Outils de sécurité avancés
+                            </div>
+                            <div class="option-explanation">
+                                Antivirus, SIEM, MFA (Authentification Multi-Facteur), gestion des accès, tests d'intrusion réguliers. Détection et réponse aux incidents organisées.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🔐</span> Cybersécurité intégrée
+                            </div>
+                            <div class="option-explanation">
+                                Gouvernance SSI structurée avec CISO désigné, conformité ISO/IEC 27001 ou équivalent, surveillance proactive, Security by Design dans les projets.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 6 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-robot"></i> 6. Automatisation et DevOps
+                        </div>
+                        <p>Quel est le niveau d'automatisation de vos opérations ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">🧹</span> Tout est manuel
+                            </div>
+                            <div class="option-explanation">
+                                Déploiements, sauvegardes, tests et configurations effectués manuellement. Forte dépendance aux compétences individuelles et risque d'erreur humain élevé.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">🔧</span> Scripts manuels isolés
+                            </div>
+                            <div class="option-explanation">
+                                Quelques automatisations locales (bash, PowerShell, etc.) créées par des collaborateurs, mais non partagées ni maintenues de manière centralisée.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">🧰</span> Automatisation partielle
+                            </div>
+                            <div class="option-explanation">
+                                Tâches récurrentes automatisées avec outils comme Jenkins, Ansible ou Terraform. Début d'intégration entre développement et exploitation.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🤖</span> Chaînes CI/CD établies
+                            </div>
+                            <div class="option-explanation">
+                                DevOps en place avec pipelines d'intégration et déploiement continus, tests automatiques, infrastructure as code. Monitoring et rollback automatisés.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🧠</span> Orchestration intelligente
+                            </div>
+                            <div class="option-explanation">
+                                Intégration d'IA pour l'optimisation, supervision proactive avec auto-remediation, approche SRE (Site Reliability Engineering), observability avancée.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 7 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-handshake"></i> 7. Gouvernance et Fournisseurs
+                        </div>
+                        <p>Comment gérez-vous vos partenaires IT ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">🧩</span> Relations improvisées
+                            </div>
+                            <div class="option-explanation">
+                                Pas de contrat clair ou suivi formalisé. Dépendance forte à un fournisseur historique ou choix basés sur des relations personnelles.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">🗂️</span> Suivi administratif de base
+                            </div>
+                            <div class="option-explanation">
+                                Contrats archivés mais non pilotés activement. Renouvellements parfois tardifs. Aucune mesure de performance ou gestion stratégique des fournisseurs.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">📊</span> Tableau de suivi contractuel
+                            </div>
+                            <div class="option-explanation">
+                                Indicateurs de performance définis, revues fournisseurs régulières. Début de diversification des partenaires et de gestion des risques associés.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">🧾</span> Partenariats pilotés
+                            </div>
+                            <div class="option-explanation">
+                                Évaluation systématique des risques fournisseurs, intégration dans le plan stratégique IT. Négociation proactive et gestion des contrats optimisée.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🤝</span> Écosystème stratégique
+                            </div>
+                            <div class="option-explanation">
+                                Partenariats win-win avec co-innovation, mutualisation des roadmaps technologiques. Fournisseurs considérés comme des extensions de l'équipe interne.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 8 -->
+                    <div class="question-card">
+                        <div class="question-title">
+                            <i class="fas fa-database"></i> 8. Données & Intelligence d'affaires
+                        </div>
+                        <p>Quelle est votre capacité à valoriser vos données ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <div class="option-text">
+                                <span class="option-emoji">🕳️</span> Aucune exploitation réelle
+                            </div>
+                            <div class="option-explanation">
+                                Les données sont dispersées dans différents systèmes, non accessibles ni utilisées pour la prise de décision. Aucune stratégie de gestion des données.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <div class="option-text">
+                                <span class="option-emoji">🧾</span> Rapports basiques manuels
+                            </div>
+                            <div class="option-explanation">
+                                Quelques tableaux Excel produits manuellement, peu de croisement d'informations. Données souvent incomplètes ou incohérentes entre sources.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <div class="option-text">
+                                <span class="option-emoji">📊</span> Dashboard opérationnel
+                            </div>
+                            <div class="option-explanation">
+                                Mise en place de KPI via Power BI, Tableau ou équivalent pour le pilotage opérationnel. Données centralisées mais qualité encore perfectible.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <div class="option-text">
+                                <span class="option-emoji">📈</span> Analyse prédictive en cours
+                            </div>
+                            <div class="option-explanation">
+                                Exploitation avancée des données avec algorithmes ou machine learning pour anticiper les tendances. Début de culture data-driven dans l'organisation.
+                            </div>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <div class="option-text">
+                                <span class="option-emoji">🤖</span> Stratégie data-driven
+                            </div>
+                            <div class="option-explanation">
+                                Gouvernance de la donnée formalisée, IA intégrée aux processus clés, Master Data Management (MDM), pilotage stratégique par la donnée.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button id="submit-btn" class="btn btn-primary btn-lg btn-submit">
+                            <i class="fas fa-chart-bar"></i> Calculer mon niveau de maturité
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="result-container" class="result-container">
+                    <div class="result-header">
+                        <h2>Résultats de votre évaluation</h2>
+                        <p class="lead">Niveau de maturité de votre DSI</p>
+                    </div>
+                    
+                    <div class="tabs">
+                        <div class="tab active" data-tab="summary">Synthèse</div>
+                        <div class="tab" data-tab="recommendations">Recommandations</div>
+                        <div class="tab" data-tab="benchmark">Benchmark</div>
+                        <div class="tab" data-tab="details">Détails par catégorie</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="summary-tab">
+                        <div class="text-center mb-4">
+                            <div id="result-level" class="result-level"></div>
+                            <div id="result-description" class="mb-4"></div>
+                            
+                            <div class="progress">
+                                <div id="progress-bar" class="progress-bar" role="progressbar"></div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-trophy"></i> Points forts</h5>
+                                    <ul id="strengths" class="text-start"></ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5><i class="fas fa-exclamation-triangle"></i> Axes d'amélioration</h5>
+                                    <ul id="improvements" class="text-start"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="radar-chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                        
+                        <div class="maturity-description">
+                            <h4><i class="fas fa-info-circle"></i> Caractéristiques de ce niveau</h4>
+                            <div id="maturity-features" class="maturity-features"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="recommendations-tab">
+                        <h4><i class="fas fa-lightbulb"></i> Recommandations stratégiques</h4>
+                        <p>Voici les actions prioritaires pour faire progresser votre DSI vers le prochain niveau de maturité :</p>
+                        
+                        <div id="strategic-recommendations"></div>
+                        
+                        <h4 class="mt-4"><i class="fas fa-cogs"></i> Bonnes pratiques à mettre en œuvre</h4>
+                        <div id="best-practices"></div>
+                        
+                        <h4 class="mt-4"><i class="fas fa-project-diagram"></i> Cas pratiques et retours d'expérience</h4>
+                        <div id="case-studies"></div>
+                    </div>
+                    
+                    <div class="tab-content" id="benchmark-tab">
+                        <h4><i class="fas fa-chart-line"></i> Comparaison sectorielle</h4>
+                        <p>Votre position par rapport aux référentiels du marché :</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Niveaux de maturité IT</h5>
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Niveau</th>
+                                            <th>Caractéristiques</th>
+                                            <th>% des organisations</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1-5 (Embryonnaire)</td>
+                                            <td>IT en survie, réactive</td>
+                                            <td>15%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6-10 (Structurée)</td>
+                                            <td>Processus de base en place</td>
+                                            <td>35%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>11-17 (Proactive)</td>
+                                            <td>Alignement métier, automatisation</td>
+                                            <td>30%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>18-24 (Mature)</td>
+                                            <td>Création de valeur, innovation</td>
+                                            <td>15%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>25+ (Visionnaire)</td>
+                                            <td>Transformation digitale continue</td>
+                                            <td>5%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Référentiels clés</h5>
+                                <div class="recommendation-card">
+                                    <div class="recommendation-title">COBIT 2019</div>
+                                    <p>Cadre de gouvernance et management TI de l'ISACA, aligné sur les objectifs business.</p>
+                                    <div class="norm-reference">Référence: ISACA COBIT 2019 Framework</div>
+                                </div>
+                                
+                                <div class="recommendation-card mt-3">
+                                    <div class="recommendation-title">ITIL 4</div>
+                                    <p>Bonnes pratiques pour la gestion des services TI, focalisé sur la création de valeur.</p>
+                                    <div class="norm-reference">Référence: AXELOS ITIL 4 Edition</div>
+                                </div>
+                                
+                                <div class="recommendation-card mt-3">
+                                    <div class="recommendation-title">ISO/IEC 27001</div>
+                                    <p>Norme internationale pour les systèmes de management de la sécurité de l'information.</p>
+                                    <div class="norm-reference">Référence: ISO/IEC 27001:2022</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="details-tab">
+                        <h4><i class="fas fa-chart-pie"></i> Détail par catégorie</h4>
+                        <p>Votre score dans chaque domaine d'évaluation :</p>
+                        
+                        <div id="category-scores"></div>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button id="download-pdf" class="btn btn-danger download-btn">
+                            <i class="fas fa-file-pdf"></i> Télécharger le rapport PDF
+                        </button>
+                        <button id="restart-quiz" class="btn btn-outline-secondary download-btn">
+                            <i class="fas fa-redo"></i> Refaire l'évaluation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Évaluation de Maturité DSI - Outil développé selon les référentiels COBIT, ITIL et ISO 27001</p>
+            <p class="small">Cet outil ne remplace pas un audit complet mais permet une première auto-évaluation.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Global variables
+        let userAnswers = [];
+        let radarChart = null;
+        
+        // DOM Ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize option cards
+            const optionCards = document.querySelectorAll('.option-card');
+            optionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected class from siblings
+                    const siblings = this.parentNode.querySelectorAll('.option-card');
+                    siblings.forEach(sib => sib.classList.remove('selected'));
+                    
+                    // Add selected class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Toggle explanation visibility
+                    const explanation = this.querySelector('.option-explanation');
+                    if (explanation.style.display === 'block') {
+                        explanation.style.display = 'none';
+                    } else {
+                        explanation.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Tab switching
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Submit button
+            document.getElementById('submit-btn').addEventListener('click', calculateResults);
+            
+            // Restart quiz button
+            document.getElementById('restart-quiz').addEventListener('click', restartQuiz);
+            
+            // Download PDF button
+            document.getElementById('download-pdf').addEventListener('click', generatePDF);
+        });
+        
+        // Calculate results
+        function calculateResults() {
+            // Get all selected options
+            const selectedOptions = document.querySelectorAll('.option-card.selected');
+            
+            // Check if all questions are answered
+            if (selectedOptions.length < 8) {
+                alert('Veuillez répondre à toutes les questions avant de soumettre.');
+                return;
+            }
+            
+            // Store answers and calculate total score
+            userAnswers = [];
+            let totalScore = 0;
+            
+            selectedOptions.forEach(option => {
+                const value = parseInt(option.getAttribute('data-value'));
+                userAnswers.push(value);
+                totalScore += value;
+            });
+            
+            // Calculate maturity level
+            const maturityLevel = calculateMaturityLevel(totalScore);
+            
+            // Display results
+            displayResults(totalScore, maturityLevel);
+            
+            // Generate radar chart
+            generateRadarChart();
+            
+            // Generate recommendations
+            generateRecommendations(userAnswers);
+            
+            // Generate category details
+            generateCategoryDetails(userAnswers);
+            
+            // Scroll to results
+            document.getElementById('result-container').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Calculate maturity level based on total score
+        function calculateMaturityLevel(totalScore) {
+            if (totalScore >= 35) return { level: '25+', name: 'Visionnaire', description: 'DSI visionnaire, excellence opérationnelle, transformation digitale en continu' };
+            if (totalScore >= 28) return { level: '18-24', name: 'Mature', description: 'DSI mature, pilotage, innovation, alignement fort avec les métiers' };
+            if (totalScore >= 21) return { level: '11-17', name: 'Proactive', description: 'Processus en place, DSI proactive, automatisation et sécurité progressent' };
+            if (totalScore >= 13) return { level: '6-10', name: 'Structuration', description: 'DSI en structuration, début de normalisation' };
+            return { level: '1-5', name: 'Embryonnaire', description: 'Maturité embryonnaire, DSI en survie. Priorité à la structuration' };
+        }
+        
+        // Display results
+        function displayResults(totalScore, maturityLevel) {
+            // Show result container and hide quiz
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('result-container').style.display = 'block';
+            
+            // Set level and description
+            document.getElementById('result-level').innerHTML = `
+                Niveau ${maturityLevel.level} - <strong>${maturityLevel.name}</strong>
+                <span class="badge ${getBadgeClass(maturityLevel.level)} ms-2">${totalScore}/40 points</span>
+            `;
+            
+            document.getElementById('result-description').textContent = maturityLevel.description;
+            
+            // Set progress bar
+            const progressPercentage = (totalScore / 40) * 100;
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = `${progressPercentage}%`;
+            progressBar.setAttribute('aria-valuenow', progressPercentage);
+            
+            // Set strengths and improvements based on answers
+            const strengthsList = document.getElementById('strengths');
+            const improvementsList = document.getElementById('improvements');
+            
+            strengthsList.innerHTML = '';
+            improvementsList.innerHTML = '';
+            
+            // Find highest and lowest scoring categories
+            const categories = [
+                'Gestion des Incidents',
+                'Documentation & Processus',
+                'Alignement IT / Métier',
+                'Culture d\'Innovation',
+                'Sécurité et Conformité',
+                'Automatisation et DevOps',
+                'Gouvernance et Fournisseurs',
+                'Données & Intelligence'
+            ];
+            
+            const categoryScores = userAnswers.map((score, index) => {
+                return { name: categories[index], score: score };
+            });
+            
+            // Sort by score
+            categoryScores.sort((a, b) => b.score - a.score);
+            
+            // Top 2 are strengths
+            strengthsList.innerHTML += `<li>${categoryScores[0].name} (Niveau ${categoryScores[0].score})</li>`;
+            strengthsList.innerHTML += `<li>${categoryScores[1].name} (Niveau ${categoryScores[1].score})</li>`;
+            
+            // Bottom 2 are improvements
+            improvementsList.innerHTML += `<li>${categoryScores[6].name} (Niveau ${categoryScores[6].score})</li>`;
+            improvementsList.innerHTML += `<li>${categoryScores[7].name} (Niveau ${categoryScores[7].score})</li>`;
+            
+            // Set maturity features
+            const maturityFeatures = document.getElementById('maturity-features');
+            maturityFeatures.innerHTML = '';
+            
+            const features = getMaturityFeatures(maturityLevel.level);
+            features.forEach(feature => {
+                maturityFeatures.innerHTML += `<li>${feature}</li>`;
+            });
+        }
+        
+        // Get badge class based on level
+        function getBadgeClass(level) {
+            if (level === '1-5') return 'badge-level-1';
+            if (level === '6-10') return 'badge-level-2';
+            if (level === '11-17') return 'badge-level-3';
+            if (level === '18-24') return 'badge-level-4';
+            return 'badge-level-5';
+        }
+        
+        // Get maturity features based on level
+        function getMaturityFeatures(level) {
+            if (level === '1-5') {
+                return [
+                    'Gestion réactive des problèmes et incidents',
+                    'Peu ou pas de processus formalisés',
+                    'Alignement limité avec les métiers',
+                    'Innovation absente ou très limitée',
+                    'Sécurité informatique minimale',
+                    'Opérations principalement manuelles',
+                    'Gestion des fournisseurs non formalisée',
+                    'Données peu exploitées pour la décision'
+                ];
+            } else if (level === '6-10') {
+                return [
+                    'Début de formalisation des processus IT',
+                    'Documentation partielle et en cours de structuration',
+                    'IT consultée ponctuellement par les métiers',
+                    'Quelques initiatives d\'innovation isolées',
+                    'Sensibilisation basique à la sécurité',
+                    'Automatisation de certaines tâches répétitives',
+                    'Suivi administratif des fournisseurs',
+                    'Rapports basiques sur les données opérationnelles'
+                ];
+            } else if (level === '11-17') {
+                return [
+                    'Processus IT formalisés et mesurés',
+                    'Documentation centralisée et maintenue',
+                    'Participation régulière de l\'IT aux projets métiers',
+                    'Cellule innovation avec budget dédié',
+                    'Politiques de sécurité établies et appliquées',
+                    'Chaînes CI/CD pour les déploiements critiques',
+                    'Évaluation des performances des fournisseurs',
+                    'Tableaux de bord pour le pilotage opérationnel'
+                ];
+            } else if (level === '18-24') {
+                return [
+                    'Gestion des services IT orientée valeur business',
+                    'Knowledge management intégré aux processus',
+                    'Co-construction des feuilles de route IT/métiers',
+                    'Innovation collaborative avec écosystème',
+                    'Cybersécurité intégrée au cycle de vie des projets',
+                    'DevOps mature avec observability avancée',
+                    'Partenariats stratégiques avec les fournisseurs',
+                    'Analyse prédictive et orientation data-driven'
+                ];
+            } else {
+                return [
+                    'Excellence opérationnelle et amélioration continue',
+                    'Base de connaissances proactive et intelligente',
+                    'IT comme partenaire stratégique de transformation',
+                    'Culture d\'innovation continue et ouverte',
+                    'Posture de sécurité Zero Trust et résilience',
+                    'Orchestration intelligente et SRE avancé',
+                    'Écosystème fournisseurs co-innovant',
+                    'Stratégie data-driven avec IA intégrée'
+                ];
+            }
+        }
+        
+        // Generate radar chart
+        function generateRadarChart() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            // Destroy previous chart if exists
+            if (radarChart) {
+                radarChart.destroy();
+            }
+            
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Gestion Incidents',
+                        'Documentation',
+                        'Alignement Métier',
+                        'Innovation',
+                        'Sécurité',
+                        'Automatisation',
+                        'Fournisseurs',
+                        'Données'
+                    ],
+                    datasets: [{
+                        label: 'Votre maturité',
+                        data: userAnswers,
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(52, 152, 219, 1)'
+                    }, {
+                        label: 'Niveau cible (5)',
+                        data: [5, 5, 5, 5, 5, 5, 5, 5],
+                        backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                        borderColor: 'rgba(46, 204, 113, 0.5)',
+                        pointBackgroundColor: 'rgba(46, 204, 113, 0.5)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(46, 204, 113, 0.5)',
+                        borderDash: [5, 5],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 5,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}/5`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Generate recommendations
+        function generateRecommendations(answers) {
+            const strategicContainer = document.getElementById('strategic-recommendations');
+            const bestPracticesContainer = document.getElementById('best-practices');
+            const caseStudiesContainer = document.getElementById('case-studies');
+            
+            strategicContainer.innerHTML = '';
+            bestPracticesContainer.innerHTML = '';
+            caseStudiesContainer.innerHTML = '';
+            
+            // Categories with lowest scores get priority recommendations
+            const categories = [
+                { name: 'Gestion des Incidents', score: answers[0] },
+                { name: 'Documentation & Processus', score: answers[1] },
+                { name: 'Alignement IT / Métier', score: answers[2] },
+                { name: 'Culture d\'Innovation', score: answers[3] },
+                { name: 'Sécurité et Conformité', score: answers[4] },
+                { name: 'Automatisation et DevOps', score: answers[5] },
+                { name: 'Gouvernance et Fournisseurs', score: answers[6] },
+                { name: 'Données & Intelligence', score: answers[7] }
+            ];
+            
+            // Sort by score (lowest first)
+            categories.sort((a, b) => a.score - b.score);
+            
+            // Generate 3 strategic recommendations for the lowest scoring categories
+            for (let i = 0; i < 3; i++) {
+                const category = categories[i];
+                const recommendation = getRecommendationForCategory(category.name, category.score);
+                
+                strategicContainer.innerHTML += `
+                    <div class="recommendation-card">
+                        <div class="recommendation-title">${category.name} (Niveau actuel: ${category.score}/5)</div>
+                        <p>${recommendation.strategic}</p>
+                        <div class="norm-reference">Référence: ${recommendation.reference}</div>
+                    </div>
+                `;
+                
+                // Add best practices
+                bestPracticesContainer.innerHTML += `
+                    <div class="best-practice">
+                        <strong>${category.name}:</strong> ${recommendation.bestPractice}
+                    </div>
+                `;
+                
+                // Add case studies
+                if (recommendation.caseStudy) {
+                    caseStudiesContainer.innerHTML += `
+                        <div class="case-study">
+                            <strong>Retour d'expérience - ${category.name}:</strong> ${recommendation.caseStudy}
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // Get recommendation for a specific category and score
+        function getRecommendationForCategory(category, score) {
+            const recommendations = {
+                'Gestion des Incidents': [
+                    {
+                        strategic: 'Mettre en place un outil de ticketing de base (GLPI, Zammad) pour tracer les incidents et mesurer les temps de résolution.',
+                        bestPractice: 'Définir des SLA (Service Level Agreements) pour les incidents critiques et communiquer ces engagements aux métiers.',
+                        caseStudy: 'Une PME industrielle a réduit son MTTR (Mean Time To Repair) de 40% en 6 mois après avoir implémenté un outil de ticketing et formé ses équipes aux processus ITIL de base.',
+                        reference: 'ITIL 4 - Pratiques de gestion des incidents'
+                    },
+                    {
+                        strategic: 'Standardiser les processus de gestion des incidents selon les bonnes pratiques ITIL et former les équipes.',
+                        bestPractice: 'Mettre en place des revues post-mortem pour les incidents majeurs afin d\'identifier les causes racines et prévenir les récidives.',
+                        caseStudy: 'Un établissement bancaire a amélioré sa disponibilité de 99.2% à 99.8% en un an grâce à l\'analyse systématique des incidents critiques.',
+                        reference: 'ITIL 4 - Pratiques de gestion des problèmes'
+                    },
+                    {
+                        strategic: 'Automatiser la détection et le routage des incidents grâce à l\'intégration entre outils de monitoring et plateforme ITSM.',
+                        bestPractice: 'Implémenter une approche SRE (Site Reliability Engineering) avec définition d\'objectifs de service (SLO) et budgets d\'erreur.',
+                        caseStudy: 'Un éditeur SaaS a atteint 99.99% de disponibilité en intégrant sa supervision à ServiceNow et en adoptant une approche data-driven de la gestion des incidents.',
+                        reference: 'Google SRE Handbook'
+                    }
+                ],
+                'Documentation & Processus': [
+                    {
+                        strategic: 'Créer un référentiel centralisé (wiki, SharePoint) pour rassembler la documentation existante.',
+                        bestPractice: 'Nommer des responsables de documentation pour chaque domaine clé et établir un calendrier de mise à jour.',
+                        caseStudy: 'Une DSI publique a réduit de 30% le temps d\'onboarding des nouveaux collaborateurs après avoir structuré sa documentation dans un wiki interne.',
+                        reference: 'ISO 9001 - Gestion de la qualité'
+                    },
+                    {
+                        strategic: 'Standardiser les modèles de documentation et les intégrer au cycle de vie des projets.',
+                        bestPractice: 'Mettre en place des revues qualité trimestrielles pour s\'assurer que la documentation reste à jour et pertinente.',
+                        caseStudy: 'Un groupe retail a accéléré ses déploiements de 25% après avoir standardisé sa documentation technique et fonctionnelle.',
+                        reference: 'CMMI - Niveau 3 (Défini)'
+                    },
+                    {
+                        strategic: 'Mettre en place un système de knowledge management avec recherche sémantique et contribution collaborative.',
+                        bestPractice: 'Intégrer la documentation aux outils de développement (comme les README dans Git) pour la rendre plus accessible et contextualisée.',
+                        caseStudy: 'Une scale-up tech a réduit ses tickets support de 40% après avoir implémenté une base de connaissances intelligente avec chatbot intégré.',
+                        reference: 'Knowledge-Centered Service (KCS)'
+                    }
+                ],
+                'Alignement IT / Métier': [
+                    {
+                        strategic: 'Organiser des réunions régulières entre responsables IT et métiers pour comprendre les besoins business.',
+                        bestPractice: 'Créer des fiches produits (product briefs) qui lient les fonctionnalités IT aux objectifs métiers.',
+                        caseStudy: 'Une assurance a amélioré la satisfaction métier de 35% en instaurant des comités de pilotage conjoints IT/métiers trimestriels.',
+                        reference: 'COBIT 2019 - Alignement stratégique'
+                    },
+                    {
+                        strategic: 'Mettre en place des indicateurs communs IT/métiers pour mesurer la valeur créée par les projets.',
+                        bestPractice: 'Développer des personas utilisateurs et des parcours clients pour mieux aligner les solutions IT sur les besoins réels.',
+                        caseStudy: 'Un groupe hôtelier a augmenté ses revenus digitaux de 20% après avoir intégré des chefs de produit métiers dans ses équipes IT.',
+                        reference: 'Framework IT Business Alignment'
+                    },
+                    {
+                        strategic: 'Co-construire la feuille de route IT avec les directions métiers dans une approche produit.',
+                        bestPractice: 'Adopter le modèle Product Owner avec des représentants métiers embarqués dans les équipes IT.',
+                        caseStudy: 'Une banque a réduit son time-to-market de 50% en passant d\'une approche projet à une approche produit avec co-responsabilisation IT/métiers.',
+                        reference: 'SAFe - Business and Technology'
+                    }
+                ],
+                'Culture d\'Innovation': [
+                    {
+                        strategic: 'Allouer un budget temps (ex: 10%) pour que les équipes explorent de nouvelles technologies.',
+                        bestPractice: 'Organiser des sessions de veille technologique mensuelles ouvertes à tous.',
+                        caseStudy: 'Un éditeur logiciel a lancé 3 nouveaux produits en 2 ans issus de projets initiés pendant le temps dédié à l\'innovation.',
+                        reference: 'Google 20% Time Policy'
+                    },
+                    {
+                        strategic: 'Créer un comité innovation pour évaluer et prioriser les idées avec un budget dédié.',
+                        bestPractice: 'Mettre en place un processus de gestion des idées avec étapes de validation et mesures d\'impact.',
+                        caseStudy: 'Une grande distribution a généré 15M€ d\'économies annuelles grâce à son programme d\'innovation collaborative interne.',
+                        reference: 'ISO 56005 - Innovation Management'
+                    },
+                    {
+                        strategic: 'Développer des partenariats avec des startups et laboratoires de recherche pour co-innover.',
+                        bestPractice: 'Organiser des hackathons ou challenges innovation avec les métiers sur des problématiques business concrètes.',
+                        caseStudy: 'Un assureur a réduit ses coûts de souscription de 30% après un Proof of Concept avec une startup spécialisée en AI.',
+                        reference: 'Corporate Startup Engagement'
+                    }
+                ],
+                'Sécurité et Conformité': [
+                    {
+                        strategic: 'Mettre en place une charte informatique et former les utilisateurs aux bonnes pratiques.',
+                        bestPractice: 'Implémenter une politique de mots de passe robustes et activer le MFA (Multi-Factor Authentication) pour les accès critiques.',
+                        caseStudy: 'Une PME a évité une attaque par phishing après avoir formé ses collaborateurs et implémenté le MFA sur tous ses comptes administrateurs.',
+                        reference: 'ANSSI - Recommandations de base'
+                    },
+                    {
+                        strategic: 'Désigner un référent sécurité et réaliser un audit de vulnérabilités annuel.',
+                        bestPractice: 'Mettre en place une politique de gestion des correctifs (patch management) pour maintenir les systèmes à jour.',
+                        caseStudy: 'Un hôpital a atteint la conformité RGPD en 9 mois après avoir réalisé un audit complet et formé ses équipes.',
+                        reference: 'RGPD - Protection des données'
+                    },
+                    {
+                        strategic: 'Obtenir une certification ISO 27001 et intégrer la sécurité dans le cycle de vie des projets (Security by Design).',
+                        bestPractice: 'Implémenter une approche Zero Trust avec micro-segmentation du réseau et accès à privilèges minimum.',
+                        caseStudy: 'Une fintech a réduit ses incidents sécurité de 80% en 2 ans après avoir obtenu ISO 27001 et formé ses développeurs au Secure Coding.',
+                        reference: 'ISO/IEC 27001:2022'
+                    }
+                ],
+                'Automatisation et DevOps': [
+                    {
+                        strategic: 'Automatiser les tâches répétitives (déploiements, sauvegardes) avec des scripts centralisés.',
+                        bestPractice: 'Standardiser les environnements de développement avec des conteneurs (Docker) pour réduire les écarts entre dev et prod.',
+                        caseStudy: 'Un éditeur a réduit ses temps de déploiement de 8h à 30min après avoir automatisé ses processus avec des scripts Ansible.',
+                        reference: 'The Phoenix Project'
+                    },
+                    {
+                        strategic: 'Mettre en place des pipelines CI/CD pour les applications critiques avec tests automatisés.',
+                        bestPractice: 'Adopter l\'infrastructure as code (Terraform) pour gérer les environnements de manière reproductible.',
+                        caseStudy: 'Une banque a augmenté ses déploiements de 4 par an à 200 par an après avoir implémenté une plateforme DevOps complète.',
+                        reference: 'Accelerate - State of DevOps'
+                    },
+                    {
+                        strategic: 'Implémenter une approche SRE avec monitoring avancé et auto-remediation.',
+                        bestPractice: 'Définir des SLO (Service Level Objectives) et budgets d\'erreur pour prioriser les efforts d\'amélioration.',
+                        caseStudy: 'Un marketplace a amélioré sa disponibilité de 99.5% à 99.95% en adoptant les principes SRE et en instrumentant ses applications.',
+                        reference: 'Google SRE Handbook'
+                    }
+                ],
+                'Gouvernance et Fournisseurs': [
+                    {
+                        strategic: 'Créer un registre des contrats avec dates de renouvellement et engagements clés.',
+                        bestPractice: 'Diversifier les fournisseurs stratégiques pour réduire les risques de dépendance.',
+                        caseStudy: 'Une entreprise a évité une interruption critique après avoir identifié et remplacé à temps un fournisseur en difficulté financière.',
+                        reference: 'IT Vendor Management Framework'
+                    },
+                    {
+                        strategic: 'Mettre en place des indicateurs de performance (KPI) et des revues trimestrielles avec les principaux fournisseurs.',
+                        bestPractice: 'Définir des clauses de sortie et plans de continuité pour les services externalisés critiques.',
+                        caseStudy: 'Un groupe a réduit ses coûts IT de 15% après avoir renégocié ses contrats sur la base de KPI mesurés et benchmarkés.',
+                        reference: 'COBIT 2019 - Gestion des fournisseurs'
+                    },
+                    {
+                        strategic: 'Développer des partenariats stratégiques avec co-innovation et feuilles de route alignées.',
+                        bestPractice: 'Créer des comités de pilotage conjoints avec les fournisseurs clés pour aligner les investissements sur la stratégie.',
+                        caseStudy: 'Un constructeur automobile a accéléré sa transformation digitale en co-développant des solutions avec ses fournisseurs historiques.',
+                        reference: 'Strategic Partnering Model'
+                    }
+                ],
+                'Données & Intelligence': [
+                    {
+                        strategic: 'Centraliser les données critiques dans un entrepôt unique (data warehouse) pour faciliter l\'analyse.',
+                        bestPractice: 'Nettoyer et standardiser les données clés (clients, produits) pour améliorer leur qualité.',
+                        caseStudy: 'Un distributeur a augmenté ses ventes croisées de 20% après avoir unifié ses données clients auparavant dispersées dans 8 systèmes.',
+                        reference: 'DAMA-DMBOK - Data Management'
+                    },
+                    {
+                        strategic: 'Mettre en place des tableaux de bord (Power BI, Tableau) pour le pilotage opérationnel.',
+                        bestPractice: 'Définir des indicateurs clés (KPI) alignés sur les objectifs business et les visualiser de manière accessible.',
+                        caseStudy: 'Une chaîne hôtelière a optimisé ses taux d\'occupation de 12% grâce à des tableaux de bord temps réel sur la demande.',
+                        reference: 'Balanced Scorecard'
+                    },
+                    {
+                        strategic: 'Développer des modèles prédictifs et prescriptifs pour anticiper les tendances et optimiser les décisions.',
+                        bestPractice: 'Mettre en place une gouvernance des données avec propriétaires (data owners) et gestionnaires (data stewards) désignés.',
+                        caseStudy: 'Un assureur a réduit ses fraudes de 25% en implémentant des algorithmes de machine learning sur ses données historiques.',
+                        reference: 'Data Mesh - Domain-Oriented'
+                    }
+                ]
+            };
+            
+            // Return recommendation based on score (low, medium, high)
+            if (score <= 2) return recommendations[category][0];
+            if (score <= 3) return recommendations[category][1];
+            return recommendations[category][2];
+        }
+        
+        // Generate category details
+        function generateCategoryDetails(answers) {
+            const categories = [
+                'Gestion des Incidents et de l\'Exploitation',
+                'Documentation & Processus',
+                'Alignement IT / Métier',
+                'Culture d\'Innovation',
+                'Sécurité et Conformité',
+                'Automatisation et DevOps',
+                'Gouvernance et Fournisseurs',
+                'Données & Intelligence d\'affaires'
+            ];
+            
+            const descriptions = [
+                'Capacité à gérer les incidents de manière structurée et à garantir la continuité de service',
+                'Qualité et exhaustivité de la documentation technique et des processus IT',
+                'Intégration de l\'IT dans la stratégie business et collaboration avec les métiers',
+                'Encouragement et structuration de l\'innovation technologique',
+                'Posture de sécurité informatique et conformité réglementaire',
+                'Niveau d\'automatisation des opérations et adoption des pratiques DevOps',
+                'Gestion stratégique des partenaires et fournisseurs IT',
+                'Exploitation des données pour la prise de décision et création de valeur'
+            ];
+            
+            const container = document.getElementById('category-scores');
+            container.innerHTML = '';
+            
+            categories.forEach((category, index) => {
+                const score = answers[index];
+                const progressPercentage = (score / 5) * 100;
+                const progressColor = getProgressColor(score);
+                
+                container.innerHTML += `
+                    <div class="category-score">
+                        <div class="category-title">
+                            <span>${category}</span>
+                            <span class="badge ${getBadgeClassForScore(score)}">${score}/5</span>
+                        </div>
+                        <p class="small text-muted">${descriptions[index]}</p>
+                        <div class="progress">
+                            <div class="progress-bar bg-${progressColor}" role="progressbar" style="width: ${progressPercentage}%" 
+                                aria-valuenow="${progressPercentage}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // Get progress color based on score
+        function getProgressColor(score) {
+            if (score <= 2) return 'danger';
+            if (score <= 3) return 'warning';
+            if (score <= 4) return 'info';
+            return 'success';
+        }
+        
+        // Get badge class based on score
+        function getBadgeClassForScore(score) {
+            if (score <= 2) return 'badge-level-1';
+            if (score <= 3) return 'badge-level-2';
+            if (score <= 4) return 'badge-level-3';
+            return 'badge-level-4';
+        }
+        
+        // Restart quiz
+        function restartQuiz() {
+            // Reset selected options
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+                card.querySelector('.option-explanation').style.display = 'none';
+            });
+            
+            // Show quiz and hide results
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('result-container').style.display = 'none';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Generate PDF report
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add title
+            doc.setFontSize(20);
+            doc.setTextColor(44, 62, 80);
+            doc.text('Rapport de Maturité DSI', 105, 20, { align: 'center' });
+            
+            // Add date
+            doc.setFontSize(12);
+            doc.setTextColor(100);
+            const today = new Date();
+            doc.text(`Généré le ${today.toLocaleDateString('fr-FR')}`, 105, 30, { align: 'center' });
+            
+            // Add maturity level
+            const resultLevel = document.getElementById('result-level').textContent;
+            const resultDesc = document.getElementById('result-description').textContent;
+            
+            doc.setFontSize(16);
+            doc.setTextColor(44, 62, 80);
+            doc.text('Niveau de maturité global', 20, 45);
+            
+            doc.setFontSize(14);
+            doc.setTextColor(52, 152, 219);
+            doc.text(resultLevel, 20, 55);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(70);
+            doc.text(resultDesc, 20, 65);
+            
+            // Add radar chart image
+            const radarCanvas = document.getElementById('radarChart');
+            const radarImage = radarCanvas.toDataURL('image/png');
+            doc.addImage(radarImage, 'PNG', 20, 75, 170, 100);
+            
+            // Add category scores
+            doc.setFontSize(16);
+            doc.setTextColor(44, 62, 80);
+            doc.text('Détail par catégorie', 20, 190);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(70);
+            
+            const categories = [
+                'Gestion des Incidents',
+                'Documentation & Processus',
+                'Alignement IT / Métier',
+                'Culture d\'Innovation',
+                'Sécurité et Conformité',
+                'Automatisation et DevOps',
+                'Gouvernance et Fournisseurs',
+                'Données & Intelligence'
+            ];
+            
+            categories.forEach((category, index) => {
+                const yPos = 200 + (index * 10);
+                doc.text(`${category}: ${userAnswers[index]}/5`, 20, yPos);
+                
+                // Simple bar for score visualization
+                doc.setDrawColor(52, 152, 219);
+                doc.setFillColor(52, 152, 219);
+                doc.rect(80, yPos - 4, userAnswers[index] * 10, 5, 'F');
+            });
+            
+            // Add recommendations
+            doc.addPage();
+            doc.setFontSize(16);
+            doc.setTextColor(44, 62, 80);
+            doc.text('Recommandations prioritaires', 20, 20);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(70);
+            
+            // Get the 3 lowest scoring categories
+            const categoryScores = categories.map((name, index) => {
+                return { name, score: userAnswers[index] };
+            });
+            
+            categoryScores.sort((a, b) => a.score - b.score);
+            
+            // Add recommendations for the 3 lowest
+            let yPos = 30;
+            for (let i = 0; i < 3; i++) {
+                const category = categoryScores[i];
+                const recommendation = getRecommendationForCategory(category.name, category.score);
+                
+                doc.setFontSize(14);
+                doc.setTextColor(52, 152, 219);
+                doc.text(`${category.name} (Score: ${category.score}/5)`, 20, yPos);
+                
+                doc.setFontSize(12);
+                doc.setTextColor(70);
+                yPos += 10;
+                doc.text(`Recommandation: ${recommendation.strategic}`, 20, yPos, { maxWidth: 170 });
+                
+                yPos += 15;
+                doc.text(`Bonnes pratiques: ${recommendation.bestPractice}`, 20, yPos, { maxWidth: 170 });
+                
+                yPos += 15;
+                doc.text(`Référence: ${recommendation.reference}`, 20, yPos, { maxWidth: 170 });
+                
+                yPos += 20;
+                
+                // Add new page if running out of space
+                if (yPos > 250 && i < 2) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+            }
+            
+            // Save the PDF
+            doc.save(`Rapport_Maturite_DSI_${today.toISOString().split('T')[0]}.pdf`);
+        }
+    </script>
+</body>
+</html>

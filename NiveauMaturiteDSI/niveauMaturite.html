@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation de Maturité DSI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--secondary-color);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .category-card {
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .option-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option-card:hover {
+            background-color: #f8f9fa;
+            border-color: var(--primary-color);
+        }
+        
+        .option-card.selected {
+            background-color: #e3f2fd;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+        }
+        
+        .emoji {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        .progress-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .report-section {
+            display: none;
+        }
+        
+        .maturity-level {
+            padding: 2rem;
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .level-1 { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .level-2 { background: linear-gradient(135deg, #f39c12, #d35400); }
+        .level-3 { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .level-4 { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .level-5 { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        
+        .recommendation-card {
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .badge-category {
+            background-color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+        
+        .tooltip-inner {
+            max-width: 350px;
+        }
+        
+        #chartContainer {
+            height: 300px;
+            margin-bottom: 2rem;
+        }
+        
+        .best-practice-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #f8f9fa;
+        }
+        
+        .best-practice-card h5 {
+            color: var(--primary-color);
+        }
+        
+        .case-study-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .reference-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--warning-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-network-wired me-2"></i>DSI Maturity Assessment
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#assessment"><i class="fas fa-clipboard-list me-1"></i>Évaluation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#report"><i class="fas fa-chart-bar me-1"></i>Rapport</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resources"><i class="fas fa-book me-1"></i>Ressources</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1><i class="fas fa-chart-line me-2"></i>Évaluation de Maturité de votre DSI</h1>
+            <p class="lead">Identifiez votre niveau de maturité sur 16 dimensions clés avec des recommandations personnalisées</p>
+        </div>
+    </section>
+
+    <!-- Assessment Section -->
+    <section id="assessment" class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-info-circle me-2"></i>Instructions</h2>
+                        <p>Ce questionnaire évalue la maturité de votre DSI sur 16 dimensions clés réparties en 8 catégories. Pour chaque question, sélectionnez la réponse qui décrit le mieux votre situation actuelle.</p>
+                        <p>À la fin du questionnaire, vous obtiendrez :</p>
+                        <ul>
+                            <li>Un score global de maturité (sur 80 points)</li>
+                            <li>Une analyse détaillée par catégorie</li>
+                            <li>Des recommandations personnalisées</li>
+                            <li>Un plan d'action prioritaire</li>
+                        </ul>
+                        <button id="startAssessment" class="btn btn-primary btn-lg">
+                            <i class="fas fa-play me-2"></i>Commencer l'évaluation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Assessment Questions -->
+                <div id="assessmentQuestions" style="display: none;">
+                    <!-- Catégorie 1: Gestion des Incidents -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-fire me-2"></i>Gestion des Incidents et Exploitation</h3>
+                    
+                    <!-- Question 1.1 -->
+                    <div class="question-container" data-category="gestion-incidents">
+                        <h4><span class="badge bg-primary me-2">1.1</span> Processus de gestion des incidents</h4>
+                        <p class="text-muted">Comment sont gérés les incidents critiques dans votre DSI ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">😱</span>
+                            <strong>A) Réaction ad-hoc sans processus</strong>
+                            <p class="mb-0 text-muted">Chaque incident est traité différemment selon les personnes disponibles.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📝</span>
+                            <strong>B) Liste manuelle des incidents</strong>
+                            <p class="mb-0 text-muted">Les incidents sont notés dans un fichier partagé avec des priorités basiques.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">⚙️</span>
+                            <strong>C) Processus partiel documenté</strong>
+                            <p class="mb-0 text-muted">Certaines procédures existent mais ne sont pas systématiquement appliquées.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🛠️</span>
+                            <strong>D) Outil ITSM avec SLA définis</strong>
+                            <p class="mb-0 text-muted">Utilisation d'un outil comme ServiceNow avec délais de résolution formalisés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🤖</span>
+                            <strong>E) Gestion proactive avec IA</strong>
+                            <p class="mb-0 text-muted">Détection automatique, routage intelligent et analyse prédictive des incidents.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 1.2 -->
+                    <div class="question-container" data-category="gestion-incidents">
+                        <h4><span class="badge bg-primary me-2">1.2</span> Amélioration continue</h4>
+                        <p class="text-muted">Comment votre DSI tire-t-elle les leçons des incidents passés ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🔄</span>
+                            <strong>A) Aucune analyse post-incident</strong>
+                            <p class="mb-0 text-muted">On passe à l'incident suivant sans formaliser les apprentissages.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📅</span>
+                            <strong>B) Discussions informelles</strong>
+                            <p class="mb-0 text-muted">Échanges verbaux sur ce qui a fonctionné ou non.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📊</span>
+                            <strong>C) Revue occasionnelle des tendances</strong>
+                            <p class="mb-0 text-muted">Analyse trimestrielle des principaux incidents.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🧐</span>
+                            <strong>D) Revue post-mortem systématique</strong>
+                            <p class="mb-0 text-muted">Pour chaque incident majeur, avec plan d'action.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">📈</span>
+                            <strong>E) Amélioration continue automatisée</strong>
+                            <p class="mb-0 text-muted">Système qui suggère des améliorations basées sur l'analyse des données.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 2: Documentation -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-book me-2"></i>Documentation & Connaissances</h3>
+                    
+                    <!-- Question 2.1 -->
+                    <div class="question-container" data-category="documentation">
+                        <h4><span class="badge bg-primary me-2">2.1</span> Gestion des connaissances</h4>
+                        <p class="text-muted">Comment les connaissances opérationnelles sont-elles capturées et partagées ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🧠</span>
+                            <strong>A) Connaissances tacites individuelles</strong>
+                            <p class="mb-0 text-muted">Chaque expert gère ses propres notes informelles.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">🗂️</span>
+                            <strong>B) Fichiers partagés éparpillés</strong>
+                            <p class="mb-0 text-muted">Sur divers drives ou serveurs sans structure claire.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📚</span>
+                            <strong>C) Wiki interne centralisé</strong>
+                            <p class="mb-0 text-muted">Avec une structure de base mais contenu incomplet.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🏛️</span>
+                            <strong>D) Base de connaissances intégrée</strong>
+                            <p class="mb-0 text-muted">Liée aux outils ITSM, avec processus de mise à jour.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🤖</span>
+                            <strong>E) Système intelligent de knowledge management</strong>
+                            <p class="mb-0 text-muted">Avec suggestions contextuelles et mise à jour automatique.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2.2 -->
+                    <div class="question-container" data-category="documentation">
+                        <h4><span class="badge bg-primary me-2">2.2</span> Documentation des processus</h4>
+                        <p class="text-muted">Comment les processus IT sont-ils documentés ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">❌</span>
+                            <strong>A) Peu ou pas de documentation</strong>
+                            <p class="mb-0 text-muted">Les processus sont compris par habitude ou transmission orale.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📋</span>
+                            <strong>B) Documents statiques obsolètes</strong>
+                            <p class="mb-0 text-muted">Existent mais rarement mis à jour ou consultés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📝</span>
+                            <strong>C) Documentation de base</strong>
+                            <p class="mb-0 text-muted">Processus critiques documentés avec versions.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🔄</span>
+                            <strong>D) Documentation vivante</strong>
+                            <p class="mb-0 text-muted">Mise à jour régulière avec validation par les équipes.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">⚡</span>
+                            <strong>E) Documentation automatisée</strong>
+                            <p class="mb-0 text-muted">Générée depuis les outils et workflows réels.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 3: Alignement Métier -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-handshake me-2"></i>Alignement IT & Métier</h3>
+                    
+                    <!-- Question 3.1 -->
+                    <div class="question-container" data-category="alignement-metier">
+                        <h4><span class="badge bg-primary me-2">3.1</span> Participation à la stratégie</h4>
+                        <p class="text-muted">Quel est le rôle de la DSI dans la définition de la stratégie d'entreprise ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🚫</span>
+                            <strong>A) Aucune participation</strong>
+                            <p class="mb-0 text-muted">La DSI est considérée comme un centre de coûts purement opérationnel.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📩</span>
+                            <strong>B) Consultation ponctuelle</strong>
+                            <p class="mb-0 text-muted">Sur des sujets techniques spécifiques.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">👥</span>
+                            <strong>C) Participation aux comités</strong>
+                            <p class="mb-0 text-muted">La DSI participe aux réunions stratégiques.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🧩</span>
+                            <strong>D) Co-construction</strong>
+                            <p class="mb-0 text-muted">La DSI contribue activement à la roadmap digitale.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🚀</span>
+                            <strong>E) Leadership digital</strong>
+                            <p class="mb-0 text-muted">La DSI pilote des initiatives stratégiques de transformation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3.2 -->
+                    <div class="question-container" data-category="alignement-metier">
+                        <h4><span class="badge bg-primary me-2">3.2</span> Compréhension des enjeux métiers</h4>
+                        <p class="text-muted">Comment les équipes IT comprennent-elles les besoins métiers ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🛑</span>
+                            <strong>A) Peu de compréhension</strong>
+                            <p class="mb-0 text-muted">Les équipes IT travaillent sur des spécifications techniques sans contexte.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📧</span>
+                            <strong>B) Échanges par tickets ou emails</strong>
+                            <p class="mb-0 text-muted">Demandes formalisées sans dialogue approfondi.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🤝</span>
+                            <strong>C) Réunions régulières</strong>
+                            <p class="mb-0 text-muted">Entre responsables IT et métiers.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">👨‍💼</span>
+                            <strong>D) Product Owners dédiés</strong>
+                            <p class="mb-0 text-muted">Qui traduisent les besoins métiers en exigences IT.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🧠</span>
+                            <strong>E) Immersion continue</strong>
+                            <p class="mb-0 text-muted">Les équipes IT comprennent intimement les processus métiers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 4: Innovation -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-lightbulb me-2"></i>Innovation & Transformation</h3>
+                    
+                    <!-- Question 4.1 -->
+                    <div class="question-container" data-category="innovation">
+                        <h4><span class="badge bg-primary me-2">4.1</span> Culture d'innovation</h4>
+                        <p class="text-muted">Comment l'innovation est-elle encouragée dans votre DSI ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🛑</span>
+                            <strong>A) Pas de focus sur l'innovation</strong>
+                            <p class="mb-0 text-muted">Priorité exclusive à l'opérationnel et aux projets en cours.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">💡</span>
+                            <strong>B) Initiatives individuelles</strong>
+                            <p class="mb-0 text-muted">Quelques collaborateurs innovent sur leur temps libre.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🏗️</span>
+                            <strong>C) Programme d'innovation</strong>
+                            <p class="mb-0 text-muted">Budget et temps alloués pour des POCs.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🚧</span>
+                            <strong>D) Lab innovation dédié</strong>
+                            <p class="mb-0 text-muted">Avec processus de sélection et déploiement des idées.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🌐</span>
+                            <strong>E) Innovation continue</strong>
+                            <p class="mb-0 text-muted">Intégrée dans tous les processus avec partenariats externes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4.2 -->
+                    <div class="question-container" data-category="innovation">
+                        <h4><span class="badge bg-primary me-2">4.2</span> Adoption des nouvelles technologies</h4>
+                        <p class="text-muted">Comment votre DSI intègre-t-elle les technologies émergentes ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🐢</span>
+                            <strong>A) Réactive et en retard</strong>
+                            <p class="mb-0 text-muted">On attend d'y être forcé par la concurrence ou les clients.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">🔍</span>
+                            <strong>B) Veille technologique passive</strong>
+                            <p class="mb-0 text-muted">On suit les tendances mais sans action concrète.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🧪</span>
+                            <strong>C) Expérimentations ponctuelles</strong>
+                            <p class="mb-0 text-muted">Quelques POCs mais rarement industrialisés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🏭</span>
+                            <strong>D) Adoption stratégique</strong>
+                            <p class="mb-0 text-muted">Roadmap d'adoption des technologies clés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">⚡</span>
+                            <strong>E) Early adopter</strong>
+                            <p class="mb-0 text-muted">On participe à des beta tests et on influence les éditeurs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 5: Sécurité -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-shield-alt me-2"></i>Sécurité & Conformité</h3>
+                    
+                    <!-- Question 5.1 -->
+                    <div class="question-container" data-category="securite">
+                        <h4><span class="badge bg-primary me-2">5.1</span> Posture de sécurité</h4>
+                        <p class="text-muted">Comment la sécurité est-elle gérée dans votre organisation ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">👶</span>
+                            <strong>A) Sécurité réactive</strong>
+                            <p class="mb-0 text-muted">On agit après les incidents sans stratégie préventive.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">🔒</span>
+                            <strong>B) Sécurité de base</strong>
+                            <p class="mb-0 text-muted">Antivirus, firewall et quelques politiques.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🛡️</span>
+                            <strong>C) Programme sécurité formel</strong>
+                            <p class="mb-0 text-muted">Avec RSSI désigné et audits réguliers.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🔐</span>
+                            <strong>D) Sécurité intégrée</strong>
+                            <p class="mb-0 text-muted">By design dans tous les projets, avec outils avancés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🤖</span>
+                            <strong>E) Approche Zero Trust</strong>
+                            <p class="mb-0 text-muted">Avec détection proactive des menaces et automatisation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5.2 -->
+                    <div class="question-container" data-category="securite">
+                        <h4><span class="badge bg-primary me-2">5.2</span> Conformité réglementaire</h4>
+                        <p class="text-muted">Comment gérez-vous les exigences réglementaires (RGPD, etc.) ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">⚠️</span>
+                            <strong>A) Peu ou pas de conformité</strong>
+                            <p class="mb-0 text-muted">On n'a pas encore été audité ou sanctionné.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📝</span>
+                            <strong>B) Documentation minimale</strong>
+                            <p class="mb-0 text-muted">Quelques procédures pour répondre aux exigences légales.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📋</span>
+                            <strong>C) Processus de conformité</strong>
+                            <p class="mb-0 text-muted">Délégué à une personne ressource.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🏛️</span>
+                            <strong>D) Conformité proactive</strong>
+                            <p class="mb-0 text-muted">Avec audits internes et plan d'amélioration continue.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🌍</span>
+                            <strong>E) Excellence réglementaire</strong>
+                            <p class="mb-0 text-muted">Anticipation des nouvelles régulations et certifications.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 6: Automatisation -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-robot me-2"></i>Automatisation & DevOps</h3>
+                    
+                    <!-- Question 6.1 -->
+                    <div class="question-container" data-category="automatisation">
+                        <h4><span class="badge bg-primary me-2">6.1</span> Niveau d'automatisation</h4>
+                        <p class="text-muted">Quelle partie de vos opérations IT est automatisée ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">👐</span>
+                            <strong>A) Tout est manuel</strong>
+                            <p class="mb-0 text-muted">Installation, configuration, déploiements manuels.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">✏️</span>
+                            <strong>B) Scripts ponctuels</strong>
+                            <p class="mb-0 text-muted">Automatisation de quelques tâches récurrentes.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🔄</span>
+                            <strong>C) Automatisation partielle</strong>
+                            <p class="mb-0 text-muted">Outils comme Ansible pour certaines opérations.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">⚙️</span>
+                            <strong>D) CI/CD et Infrastructure as Code</strong>
+                            <p class="mb-0 text-muted">Déploiements automatisés et gestion de configuration.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🤖</span>
+                            <strong>E) Autonome</strong>
+                            <p class="mb-0 text-muted">Auto-healing, scaling automatique et IAOps.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6.2 -->
+                    <div class="question-container" data-category="automatisation">
+                        <h4><span class="badge bg-primary me-2">6.2</span> Culture DevOps</h4>
+                        <p class="text-muted">Comment les équipes Dev et Ops collaborent-elles ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🧱</span>
+                            <strong>A) Silos séparés</strong>
+                            <p class="mb-0 text-muted">Peu de communication entre développement et exploitation.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📩</span>
+                            <strong>B) Tickets et procédures</strong>
+                            <p class="mb-0 text-muted">Échanges formalisés via un système de tickets.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🤝</span>
+                            <strong>C) Collaboration ponctuelle</strong>
+                            <p class="mb-0 text-muted">Réunions communes pour les projets importants.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🔄</span>
+                            <strong>D) Pratiques DevOps</strong>
+                            <p class="mb-0 text-muted">Equipes pluridisciplinaires et outils partagés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🚀</span>
+                            <strong>E) DevOps mature</strong>
+                            <p class="mb-0 text-muted">Responsabilité partagée, SRE et déploiements multiples par jour.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 7: Gouvernance -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-chess me-2"></i>Gouvernance IT</h3>
+                    
+                    <!-- Question 7.1 -->
+                    <div class="question-container" data-category="gouvernance">
+                        <h4><span class="badge bg-primary me-2">7.1</span> Gestion des fournisseurs</h4>
+                        <p class="text-muted">Comment gérez-vous vos relations avec les fournisseurs IT ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🎲</span>
+                            <strong>A) Relations ad-hoc</strong>
+                            <p class="mb-0 text-muted">Contrats non standardisés, négociations au cas par cas.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📑</span>
+                            <strong>B) Contrats formalisés</strong>
+                            <p class="mb-0 text-muted">Mais sans suivi systématique des performances.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📊</span>
+                            <strong>C) Tableau de bord fournisseurs</strong>
+                            <p class="mb-0 text-muted">Avec indicateurs clés et revues périodiques.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🤝</span>
+                            <strong>D) Partenariats stratégiques</strong>
+                            <p class="mb-0 text-muted">Co-développement et partage des risques/benefits.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🌐</span>
+                            <strong>E) Écosystème digital</strong>
+                            <p class="mb-0 text-muted">Intégration profonde avec les partenaires technologiques.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7.2 -->
+                    <div class="question-container" data-category="gouvernance">
+                        <h4><span class="badge bg-primary me-2">7.2</span> Gestion du portefeuille IT</h4>
+                        <p class="text-muted">Comment priorisez-vous les investissements et projets IT ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🔥</span>
+                            <strong>A) Priorités changeantes</strong>
+                            <p class="mb-0 text-muted">Selon les urgences du moment sans vision long terme.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📝</span>
+                            <strong>B) Liste de projets</strong>
+                            <p class="mb-0 text-muted">Suivi dans un tableur mais sans méthode claire.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📅</span>
+                            <strong>C) Roadmap IT</strong>
+                            <p class="mb-0 text-muted">Planification annuelle avec jalons.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">⚖️</span>
+                            <strong>D) Méthode de priorisation</strong>
+                            <p class="mb-0 text-muted">Basée sur la valeur métier et l'alignement stratégique.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">📈</span>
+                            <strong>E) Gestion dynamique</strong>
+                            <p class="mb-0 text-muted">Avec réévaluation continue et indicateurs avancés.</p>
+                        </div>
+                    </div>
+
+                    <!-- Catégorie 8: Données -->
+                    <h3 class="mt-5 mb-3 border-bottom pb-2"><i class="fas fa-database me-2"></i>Gestion des Données</h3>
+                    
+                    <!-- Question 8.1 -->
+                    <div class="question-container" data-category="donnees">
+                        <h4><span class="badge bg-primary me-2">8.1</span> Qualité et gouvernance des données</h4>
+                        <p class="text-muted">Comment assurez-vous la qualité et la gouvernance de vos données ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">🗃️</span>
+                            <strong>A) Données éparpillées</strong>
+                            <p class="mb-0 text-muted">Multiples silos sans cohérence ni qualité contrôlée.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">🧹</span>
+                            <strong>B) Nettoyages ponctuels</strong>
+                            <p class="mb-0 text-muted">Avant des projets spécifiques comme des migrations.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">📋</span>
+                            <strong>C) Politique de données</strong>
+                            <p class="mb-0 text-muted">Documentée avec des responsables désignés.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🏛️</span>
+                            <strong>D) Gouvernance formelle</strong>
+                            <p class="mb-0 text-muted">Avec outils de qualité et métriques suivies.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">🤖</span>
+                            <strong>E) Data mesh</strong>
+                            <p class="mb-0 text-muted">Approche décentralisée avec contrats de données et automatisation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8.2 -->
+                    <div class="question-container" data-category="donnees">
+                        <h4><span class="badge bg-primary me-2">8.2</span> Valorisation des données</h4>
+                        <p class="text-muted">Comment exploitez-vous vos données pour créer de la valeur ?</p>
+                        
+                        <div class="option-card" data-value="1">
+                            <span class="emoji">📊</span>
+                            <strong>A) Rapports statiques</strong>
+                            <p class="mb-0 text-muted">Quelques tableaux Excel partagés occasionnellement.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="2">
+                            <span class="emoji">📈</span>
+                            <strong>B) Tableaux de bord</strong>
+                            <p class="mb-0 text-muted">Outils BI pour le reporting opérationnel.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="3">
+                            <span class="emoji">🔍</span>
+                            <strong>C) Analyse avancée</strong>
+                            <p class="mb-0 text-muted">Data warehouse et analyses prédictives.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="4">
+                            <span class="emoji">🧠</span>
+                            <strong>D) Intelligence artificielle</strong>
+                            <p class="mb-0 text-muted">Modèles ML pour l'optimisation et la personnalisation.</p>
+                        </div>
+                        
+                        <div class="option-card" data-value="5">
+                            <span class="emoji">💡</span>
+                            <strong>E) Data-driven organization</strong>
+                            <p class="mb-0 text-muted">Les données alimentent toutes les décisions stratégiques.</p>
+                        </div>
+                    </div>
+
+                    <button id="submitAssessment" class="btn btn-success btn-lg w-100 mb-5" disabled>
+                        <i class="fas fa-check-circle me-2"></i>Générer le rapport complet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Section -->
+    <section id="report" class="report-section container mb-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h2 class="card-title"><i class="fas fa-chart-pie me-2"></i>Rapport de Maturité de votre DSI</h2>
+                        <p class="lead">Voici les résultats de votre évaluation sur 16 dimensions clés</p>
+                    </div>
+                </div>
+
+                <!-- Global Score -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title"><i class="fas fa-star me-2"></i>Score Global</h3>
+                                <div class="d-flex align-items-center justify-content-center mb-3">
+                                    <div class="display-4 fw-bold" id="globalScore">0</div>
+                                    <div class="ms-3">/ 80 points</div>
+                                </div>
+                                <div class="progress" style="height: 20px;">
+                                    <div id="globalProgress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h3 class="card-title"><i class="fas fa-tachometer-alt me-2"></i>Niveau de Maturité</h3>
+                                <div id="maturityLevel" class="maturity-level level-1 text-center">
+                                    <h2 class="mb-3">🌪️ Niveau 1-10</h2>
+                                    <p class="lead mb-0">Maturité embryonnaire - Priorité à la structuration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Radar Chart -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fas fa-chart-radar me-2"></i>Profil de Maturité par Catégorie</h3>
+                        <div id="chartContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Detailed Results -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fas fa-list-ul me-2"></i>Résultats Détailés par Catégorie</h3>
+                        <div id="detailedResults"></div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fas fa-lightbulb me-2"></i>Recommandations Stratégiques</h3>
+                        <div id="recommendations"></div>
+                    </div>
+                </div>
+
+                <!-- Action Plan -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title"><i class="fas fa-tasks me-2"></i>Plan d'Action Prioritaire</h3>
+                        <div id="actionPlan"></div>
+                    </div>
+                </div>
+
+                <!-- Export Buttons -->
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <button id="exportPDF" class="btn btn-danger me-3">
+                            <i class="fas fa-file-pdf me-2"></i>Exporter en PDF
+                        </button>
+                        <button id="exportPPT" class="btn btn-warning me-3">
+                            <i class="fas fa-file-powerpoint me-2"></i>Exporter en PowerPoint
+                        </button>
+                        <button id="sendEmail" class="btn btn-primary">
+                            <i class="fas fa-envelope me-2"></i>Envoyer par email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="container mb-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-book me-2"></i>Ressources et Références</h2>
+                        <p class="card-text">Explorez ces ressources pour approfondir votre compréhension et améliorer la maturité de votre DSI.</p>
+                        
+                        <div class="row mt-4">
+                            <!-- Best Practices -->
+                            <div class="col-md-6">
+                                <h4><i class="fas fa-check-circle text-success me-2"></i>Bonnes Pratiques</h4>
+                                
+                                <div class="best-practice-card">
+                                    <h5>ITIL 4 pour la gestion des services</h5>
+                                    <p>Cadre complet pour la gestion des services IT avec des processus éprouvés.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">En savoir plus</a>
+                                </div>
+                                
+                                <div class="best-practice-card">
+                                    <h5>COBIT pour la gouvernance IT</h5>
+                                    <p>Cadre de gouvernance et de management des technologies de l'information.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">En savoir plus</a>
+                                </div>
+                                
+                                <div class="best-practice-card">
+                                    <h5>DevOps et SRE</h5>
+                                    <p>Méthodologies pour améliorer la collaboration et la fiabilité des systèmes.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">En savoir plus</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Case Studies -->
+                            <div class="col-md-6">
+                                <h4><i class="fas fa-building text-primary me-2"></i>Cas Pratiques & RETEX</h4>
+                                
+                                <div class="case-study-card">
+                                    <h5>Transformation digitale d'une banque</h5>
+                                    <p>Comment une grande banque a modernisé son infrastructure et ses processus.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Voir l'étude</a>
+                                </div>
+                                
+                                <div class="case-study-card">
+                                    <h5>Mise en place d'un ITSM</h5>
+                                    <p>Retour d'expérience sur l'implémentation de ServiceNow dans une PME.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Voir l'étude</a>
+                                </div>
+                                
+                                <div class="case-study-card">
+                                    <h5>Migration vers le Cloud</h5>
+                                    <p>Stratégie et leçons apprises lors d'une migration Azure complète.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Voir l'étude</a>
+                                </div>
+                            </div>
+                            
+                            <!-- References -->
+                            <div class="col-12 mt-4">
+                                <h4><i class="fas fa-link text-warning me-2"></i>Référentiels & Normes</h4>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="reference-card">
+                                            <h5>ISO/IEC 27001</h5>
+                                            <p>Norme internationale pour les systèmes de management de la sécurité de l'information.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="reference-card">
+                                            <h5>ISO/IEC 38500</h5>
+                                            <p>Norme pour la gouvernance des technologies de l'information.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="reference-card">
+                                            <h5>NIST Cybersecurity Framework</h5>
+                                            <p>Cadre de référence pour la gestion des risques de cybersécurité.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Progression du questionnaire :</strong>
+                    <span id="progressText">0/16 questions</span>
+                </div>
+                <div class="progress flex-grow-1 mx-3" style="height: 10px;">
+                    <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+                <button id="viewReportBtn" class="btn btn-primary" style="display: none;">
+                    <i class="fas fa-chart-bar me-2"></i>Voir le rapport
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize variables
+            const questions = document.querySelectorAll('.question-container');
+            const optionCards = document.querySelectorAll('.option-card');
+            const submitBtn = document.getElementById('submitAssessment');
+            const startBtn = document.getElementById('startAssessment');
+            const assessmentSection = document.getElementById('assessmentQuestions');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const viewReportBtn = document.getElementById('viewReportBtn');
+            const reportSection = document.getElementById('report');
+            const globalScoreElement = document.getElementById('globalScore');
+            const globalProgressElement = document.getElementById('globalProgress');
+            const maturityLevelElement = document.getElementById('maturityLevel');
+            const detailedResultsElement = document.getElementById('detailedResults');
+            const recommendationsElement = document.getElementById('recommendations');
+            const actionPlanElement = document.getElementById('actionPlan');
+            
+            let answers = {};
+            let answeredQuestions = 0;
+            
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            // Start assessment
+            startBtn.addEventListener('click', function() {
+                assessmentSection.style.display = 'block';
+                startBtn.style.display = 'none';
+                updateProgress();
+            });
+            
+            // Option selection
+            optionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const questionContainer = this.closest('.question-container');
+                    const questionId = Array.from(questions).indexOf(questionContainer) + 1;
+                    const value = parseInt(this.getAttribute('data-value'));
+                    const category = questionContainer.getAttribute('data-category');
+                    
+                    // Remove selected class from all options in this question
+                    questionContainer.querySelectorAll('.option-card').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Store answer
+                    answers[questionId] = {
+                        value: value,
+                        category: category,
+                        question: questionContainer.querySelector('h4').textContent,
+                        selectedOption: this.querySelector('strong').textContent,
+                        description: this.querySelector('p').textContent
+                    };
+                    
+                    // Check if all questions are answered
+                    answeredQuestions = Object.keys(answers).length;
+                    updateProgress();
+                    
+                    // Enable submit button if all questions are answered
+                    if (answeredQuestions === questions.length) {
+                        submitBtn.disabled = false;
+                    }
+                });
+            });
+            
+            // Update progress bar and text
+            function updateProgress() {
+                const progress = (answeredQuestions / questions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `${answeredQuestions}/${questions.length} questions`;
+                
+                if (answeredQuestions === questions.length) {
+                    viewReportBtn.style.display = 'block';
+                }
+            }
+            
+            // View report button
+            viewReportBtn.addEventListener('click', function() {
+                generateReport();
+                reportSection.style.display = 'block';
+                document.querySelector('a[href="#report"]').click();
+            });
+            
+            // Submit assessment
+            submitBtn.addEventListener('click', function() {
+                generateReport();
+                reportSection.style.display = 'block';
+                document.querySelector('a[href="#report"]').click();
+            });
+            
+            // Generate report
+            function generateReport() {
+                // Calculate global score
+                let totalScore = 0;
+                Object.values(answers).forEach(answer => {
+                    totalScore += answer.value;
+                });
+                
+                globalScoreElement.textContent = totalScore;
+                const progressPercentage = (totalScore / 80) * 100; // 16 questions * 5 points max
+                globalProgressElement.style.width = `${progressPercentage}%`;
+                
+                // Determine maturity level
+                let maturityLevel, maturityDescription;
+                
+                if (totalScore <= 20) {
+                    maturityLevel = "🌪️ Niveau 1-10";
+                    maturityDescription = "Maturité embryonnaire - Priorité à la structuration des processus de base";
+                    maturityLevelElement.className = "maturity-level level-1 text-center";
+                } else if (totalScore <= 40) {
+                    maturityLevel = "🧱 Niveau 11-20";
+                    maturityDescription = "DSI en structuration - Début de standardisation et d'alignement";
+                    maturityLevelElement.className = "maturity-level level-2 text-center";
+                } else if (totalScore <= 54) {
+                    maturityLevel = "⚙️ Niveau 21-27";
+                    maturityDescription = "Processus établis - Début d'automatisation et d'optimisation";
+                    maturityLevelElement.className = "maturity-level level-3 text-center";
+                } else if (totalScore <= 68) {
+                    maturityLevel = "🚀 Niveau 28-34";
+                    maturityDescription = "DSI mature - Alignement stratégique et innovation";
+                    maturityLevelElement.className = "maturity-level level-4 text-center";
+                } else {
+                    maturityLevel = "🧠 Niveau 35+";
+                    maturityDescription = "DSI visionnaire - Excellence opérationnelle et transformation continue";
+                    maturityLevelElement.className = "maturity-level level-5 text-center";
+                }
+                
+                maturityLevelElement.innerHTML = `
+                    <h2 class="mb-3">${maturityLevel}</h2>
+                    <p class="lead mb-0">${maturityDescription}</p>
+                `;
+                
+                // Generate detailed results
+                let detailedResultsHTML = '<div class="row">';
+                
+                Object.entries(answers).forEach(([questionId, answer]) => {
+                    const progressPercentage = (answer.value / 5) * 100;
+                    let progressColor;
+                    
+                    if (answer.value <= 2) progressColor = 'bg-danger';
+                    else if (answer.value <= 3) progressColor = 'bg-warning';
+                    else if (answer.value <= 4) progressColor = 'bg-info';
+                    else progressColor = 'bg-success';
+                    
+                    detailedResultsHTML += `
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">${answer.question}</h5>
+                                    <p class="card-text"><strong>Votre réponse :</strong> ${answer.selectedOption}</p>
+                                    <p class="card-text text-muted">${answer.description}</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 me-3">
+                                            <div class="progress" style="height: 10px;">
+                                                <div class="progress-bar ${progressColor}" role="progressbar" style="width: ${progressPercentage}%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="fw-bold">${answer.value}/5</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                detailedResultsHTML += '</div>';
+                detailedResultsElement.innerHTML = detailedResultsHTML;
+                
+                // Generate radar chart
+                generateRadarChart();
+                
+                // Generate recommendations
+                generateRecommendations(totalScore);
+                
+                // Generate action plan
+                generateActionPlan(totalScore);
+            }
+            
+            // Generate radar chart
+            function generateRadarChart() {
+                const categories = [
+                    'Gestion Incidents',
+                    'Documentation',
+                    'Alignement Métier',
+                    'Innovation',
+                    'Sécurité',
+                    'Automatisation',
+                    'Gouvernance',
+                    'Données'
+                ];
+                
+                const categoryScores = {};
+                
+                // Calculate average score per category
+                Object.values(answers).forEach(answer => {
+                    if (!categoryScores[answer.category]) {
+                        categoryScores[answer.category] = { sum: 0, count: 0 };
+                    }
+                    categoryScores[answer.category].sum += answer.value;
+                    categoryScores[answer.category].count += 1;
+                });
+                
+                const dataValues = categories.map(cat => {
+                    const key = cat.toLowerCase().replace(' ', '-');
+                    return categoryScores[key] ? (categoryScores[key].sum / categoryScores[key].count) : 0;
+                });
+                
+                const ctx = document.createElement('canvas');
+                document.getElementById('chartContainer').innerHTML = '';
+                document.getElementById('chartContainer').appendChild(ctx);
+                
+                new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: categories,
+                        datasets: [{
+                            label: 'Score par catégorie',
+                            data: dataValues,
+                            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgba(52, 152, 219, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 5,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        elements: {
+                            line: {
+                                tension: 0.1
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Generate recommendations
+            function generateRecommendations(totalScore) {
+                let recommendationsHTML = '<div class="row">';
+                
+                // General recommendations based on maturity level
+                if (totalScore <= 20) {
+                    recommendationsHTML += `
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-tools text-primary me-2"></i>Structurer les processus de base</h5>
+                                    <p class="card-text">Priorisez la mise en place de processus ITSM de base (incidents, demandes, changements) avec un outil adapté à votre taille.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Choisir un outil ticketing, documenter les procédures critiques, former les équipes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-file-alt text-primary me-2"></i>Centraliser la documentation</h5>
+                                    <p class="card-text">Créez un référentiel unique pour la documentation IT avec une structure claire et des processus de mise à jour.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Sélectionner une plateforme (Wiki, SharePoint), créer des templates, nommer des responsables.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-shield-alt text-primary me-2"></i>Renforcer la sécurité de base</h5>
+                                    <p class="card-text">Implémentez les mesures essentielles : politiques de mots de passe, sauvegardes automatisées, sensibilisation des utilisateurs.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Audit de sécurité, plan de formation, mise en place des contrôles de base.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-users text-primary me-2"></i>Améliorer l'alignement métier</h5>
+                                    <p class="card-text">Organisez des réunions régulières avec les responsables métiers pour comprendre leurs besoins et priorités.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Créer des comités IT/Métiers, développer une compréhension des processus métiers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (totalScore <= 40) {
+                    recommendationsHTML += `
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-random text-primary me-2"></i>Standardiser les processus IT</h5>
+                                    <p class="card-text">Formalisez et standardisez vos processus IT selon les bonnes pratiques ITIL (gestion des incidents, problèmes, changements).</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Former les équipes, documenter les processus, mettre en place des indicateurs.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-chart-line text-primary me-2"></i>Mettre en place des indicateurs</h5>
+                                    <p class="card-text">Définissez des KPI pour mesurer la performance des services IT et identifiez les axes d'amélioration.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Identifier les métriques clés, créer des tableaux de bord, analyser les tendances.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-project-diagram text-primary me-2"></i>Automatiser les tâches répétitives</h5>
+                                    <p class="card-text">Identifiez les tâches manuelles répétitives et automatisez-les avec des scripts ou des outils comme Ansible.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Cartographier les processus, prioriser les automatisations, former les équipes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-handshake text-primary me-2"></i>Structurer la gouvernance fournisseurs</h5>
+                                    <p class="card-text">Mettez en place un tableau de bord pour suivre les contrats et les performances des fournisseurs.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Centraliser les contrats, définir des SLA, organiser des revues régulières.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (totalScore <= 54) {
+                    recommendationsHTML += `
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-robot text-primary me-2"></i>Développer l'automatisation avancée</h5>
+                                    <p class="card-text">Implémentez des pipelines CI/CD et automatisez les tests pour accélérer les livraisons.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Évaluer les outils DevOps, créer des pipelines, automatiser les tests.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-user-shield text-primary me-2"></i>Renforcer la sécurité avancée</h5>
+                                    <p class="card-text">Déployez des outils avancés comme SIEM, MFA et réalisez des tests d'intrusion réguliers.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Audit de sécurité, déploiement d'outils, formation continue.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-lightbulb text-primary me-2"></i>Créer une cellule innovation</h5>
+                                    <p class="card-text">Allouez du temps et un budget dédié à l'innovation, avec un processus de sélection des idées.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Définir un budget, créer un processus d'idéation, organiser des hackathons.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-database text-primary me-2"></i>Valoriser les données</h5>
+                                    <p class="card-text">Développez des tableaux de bord avancés et commencez à explorer l'analyse prédictive.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Centraliser les données, choisir des outils BI, former aux analyses avancées.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (totalScore <= 68) {
+                    recommendationsHTML += `
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-brain text-primary me-2"></i>Optimisation continue</h5>
+                                    <p class="card-text">Mettez en place des mécanismes d'amélioration continue basés sur les données et les retours utilisateurs.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Mesurer l'expérience utilisateur, analyser les données opérationnelles, itérer.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-chess-queen text-primary me-2"></i>Positionnement stratégique</h5>
+                                    <p class="card-text">Positionnez la DSI comme partenaire stratégique dans les décisions métier et la transformation digitale.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Participer à la stratégie d'entreprise, développer des cas business, communiquer la valeur.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-atom text-primary me-2"></i>Innovation collaborative</h5>
+                                    <p class="card-text">Développez des partenariats avec des startups et organisez des hackathons pour stimuler l'innovation.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Identifier des partenaires, créer des programmes communs, mesurer les résultats.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-ai text-primary me-2"></i>Intelligence Artificielle</h5>
+                                    <p class="card-text">Explorez l'utilisation de l'IA pour automatiser les processus décisionnels et améliorer l'expérience utilisateur.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Identifier des cas d'usage, former les équipes, démarrer avec des POCs.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    recommendationsHTML += `
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-rocket text-primary me-2"></i>Transformation continue</h5>
+                                    <p class="card-text">Anticipez les disruptions technologiques et adaptez continuellement votre organisation.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Veille technologique, agilité organisationnelle, expérimentation constante.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-network-wired text-primary me-2"></i>Écosystème digital</h5>
+                                    <p class="card-text">Développez un écosystème digital intégré avec vos partenaires et clients.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Développer des API, créer des plateformes collaboratives, standardiser les échanges.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-chart-network text-primary me-2"></i>Data-driven organization</h5>
+                                    <p class="card-text">Faites de la donnée le pilier central de toutes vos décisions stratégiques et opérationnelles.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Culture data, outils avancés d'analyse, intégration dans tous les processus.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="recommendation-card card">
+                                <div class="card-body">
+                                    <h5 class="card-title"><i class="fas fa-fw fa-user-astronaut text-primary me-2"></i>Expérience employé</h5>
+                                    <p class="card-text">Optimisez l'expérience employé avec des outils digitaux avancés et une culture d'entreprise innovante.</p>
+                                    <p class="card-text"><strong>Actions clés :</strong> Outils collaboratifs, formation continue, environnement de travail digital.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Add category-specific recommendations for lowest scores
+                const categories = [
+                    'gestion-incidents',
+                    'documentation',
+                    'alignement-metier',
+                    'innovation',
+                    'securite',
+                    'automatisation',
+                    'gouvernance',
+                    'donnees'
+                ];
+                
+                const categoryNames = [
+                    'Gestion des Incidents',
+                    'Documentation',
+                    'Alignement Métier',
+                    'Innovation',
+                    'Sécurité',
+                    'Automatisation',
+                    'Gouvernance',
+                    'Données'
+                ];
+                
+                const categoryScores = {};
+                
+                // Calculate average score per category
+                Object.values(answers).forEach(answer => {
+                    if (!categoryScores[answer.category]) {
+                        categoryScores[answer.category] = { sum: 0, count: 0 };
+                    }
+                    categoryScores[answer.category].sum += answer.value;
+                    categoryScores[answer.category].count += 1;
+                });
+                
+                // Find the 2 lowest scoring categories
+                const sortedCategories = categories.map(cat => {
+                    const scoreObj = categoryScores[cat] || { sum: 0, count: 1 };
+                    return {
+                        category: cat,
+                        name: categoryNames[categories.indexOf(cat)],
+                        score: scoreObj.sum / scoreObj.count
+                    };
+                }).sort((a, b) => a.score - b.score);
+                
+                const lowestCategories = sortedCategories.slice(0, 2);
+                
+                lowestCategories.forEach(cat => {
+                    let specificRec = '';
+                    
+                    if (cat.category === 'gestion-incidents') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-bug text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Implémentez un outil ITSM comme ServiceNow ou Jira Service Management pour structurer la gestion des incidents.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Choisir un outil, définir des SLA, former les équipes, mettre en place des revues post-mortem.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'documentation') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-book text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Centralisez la documentation dans un outil comme Confluence ou SharePoint avec un processus de mise à jour régulière.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Choisir une plateforme, structurer le contenu, nommer des responsables, automatiser les mises à jour.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'alignement-metier') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-handshake text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Créez des comités stratégiques IT/Métiers pour co-construire la roadmap digitale.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Organiser des réunions régulières, créer des groupes de travail, développer une compréhension mutuelle.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'innovation') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-lightbulb text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Allouez 10-20% du temps des équipes à des projets d'innovation et organisez des hackathons réguliers.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Définir un budget innovation, créer un processus de sélection des idées, mesurer les résultats.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'securite') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-shield-alt text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Mettez en place une gouvernance SSI avec un RSSI dédié et un comité de sécurité.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Audit de sécurité, déploiement d'outils avancés, formation continue, certification ISO 27001.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'automatisation') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-robot text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Automatisez 80% des tâches répétitives avec des outils comme Ansible, Terraform ou des scripts custom.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Cartographier les processus, prioriser les automatisations, former les équipes, mesurer les gains.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'gouvernance') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-chess text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Adoptez un cadre de gouvernance comme COBIT et alignez les investissements IT sur la stratégie d'entreprise.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Former sur COBIT, créer un office de gestion de portefeuille projets, aligner les budgets.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (cat.category === 'donnees') {
+                        specificRec = `
+                            <div class="col-md-6 mb-3">
+                                <div class="recommendation-card card">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-fw fa-database text-primary me-2"></i>Améliorer ${cat.name}</h5>
+                                        <p class="card-text">Déployez une stratégie data-driven avec un lac de données, des outils BI avancés et des analyses prédictives.</p>
+                                        <p class="card-text"><strong>Actions :</strong> Centraliser les données, nommer un Chief Data Officer, mettre en place une gouvernance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    recommendationsHTML += specificRec;
+                });
+                
+                recommendationsHTML += '</div>';
+                recommendationsElement.innerHTML = recommendationsHTML;
+            }
+            
+            // Generate action plan
+            function generateActionPlan(totalScore) {
+                let actionPlanHTML = '<div class="row">';
+                
+                // Generate action plan based on maturity level
+                if (totalScore <= 20) {
+                    actionPlanHTML += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">1. Structurer la gestion des incidents</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Choisir un outil de ticketing adapté</li>
+                                        <li>Définir des priorités et SLA de base</li>
+                                        <li>Documenter les procédures courantes</li>
+                                        <li>Former les équipes</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 1-3 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">2. Centraliser la documentation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Sélectionner une plateforme de documentation</li>
+                                        <li>Créer une structure de base</li>
+                                        <li>Documenter les processus critiques</li>
+                                        <li>Nommer des responsables</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 1-2 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">3. Sécurité de base</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Mettre en place une politique de mots de passe</li>
+                                        <li>Configurer des sauvegardes automatiques</li>
+                                        <li>Former les utilisateurs</li>
+                                        <li>Auditer les accès</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 1 mois | Priorité: Critique</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (totalScore <= 40) {
+                    actionPlanHTML += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">1. Standardiser les processus</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Former aux bonnes pratiques ITIL</li>
+                                        <li>Documenter les processus clés</li>
+                                        <li>Mettre en place des indicateurs</li>
+                                        <li>Automatiser les processus répétitifs</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 3-6 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">2. Automatisation initiale</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Identifier les tâches répétitives</li>
+                                        <li>Développer des scripts d'automatisation</li>
+                                        <li>Mettre en place Ansible ou équivalent</li>
+                                        <li>Former les équipes</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 2-4 mois | Priorité: Moyenne</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">3. Alignement métier</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Créer des comités IT/Métiers</li>
+                                        <li>Définir une feuille de route commune</li>
+                                        <li>Mettre en place des indicateurs métiers</li>
+                                        <li>Former les équipes IT aux enjeux métiers</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 3-5 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (totalScore <= 54) {
+                    actionPlanHTML += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">1. DevOps et CI/CD</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Mettre en place des pipelines CI/CD</li>
+                                        <li>Automatiser les tests</li>
+                                        <li>Adopter une approche SRE</li>
+                                        <li>Monitorer les performances</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 4-6 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">2. Sécurité avancée</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Déployer des outils SIEM</li>
+                                        <li>Mettre en place le MFA</li>
+                                        <li>Réaliser des tests d'intrusion</li>
+                                        <li>Obtenir ISO 27001</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 3-6 mois | Priorité: Critique</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">3. Innovation structurée</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Créer une cellule innovation</li>
+                                        <li>Allouer un budget dédié</li>
+                                        <li>Mettre en place un processus d'idéation</li>
+                                        <li>Organiser des hackathons</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 2-4 mois | Priorité: Moyenne</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else if (totalScore <= 68) {
+                    actionPlanHTML += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">1. Transformation digitale</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Définir une stratégie digitale</li>
+                                        <li>Moderniser les applications legacy</li>
+                                        <li>Adopter une approche produit</li>
+                                        <li>Former aux nouvelles méthodes</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 6-12 mois | Priorité: Stratégique</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">2. Data-driven organization</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Mettre en place un data lake</li>
+                                        <li>Développer des analyses prédictives</li>
+                                        <li>Former aux data sciences</li>
+                                        <li>Créer une gouvernance des données</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 6-9 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">3. Excellence opérationnelle</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Automatiser 80% des opérations</li>
+                                        <li>Mettre en place l'IAOps</li>
+                                        <li>Optimiser les coûts IT</li>
+                                        <li>Améliorer l'expérience utilisateur</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 6-12 mois | Priorité: Élevée</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    actionPlanHTML += `
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">1. Innovation disruptive</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Créer un lab d'innovation</li>
+                                        <li>Investir dans les technologies émergentes</li>
+                                        <li>Développer des POCs avancés</li>
+                                        <li>Participer à des écosystèmes innovants</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 6-12 mois | Priorité: Stratégique</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">2. Écosystème digital</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Développer des API ouvertes</li>
+                                        <li>Créer des partenariats technologiques</li>
+                                        <li>Construire une plateforme digitale</li>
+                                        <li>Standardiser les échanges</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: 9-18 mois | Priorité: Stratégique</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0">3. Transformation continue</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Mettre en place une veille technologique</li>
+                                        <li>Adapter l'organisation en continu</li>
+                                        <li>Développer l'agilité stratégique</li>
+                                        <li>Anticiper les disruptions</li>
+                                    </ul>
+                                    <div class="text-muted"><small>Délai: Continu | Priorité: Permanente</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                actionPlanHTML += '</div>';
+                actionPlanElement.innerHTML = actionPlanHTML;
+            }
+            
+            // Export to PDF
+            document.getElementById('exportPDF').addEventListener('click', function() {
+                alert('Fonctionnalité d\'export PDF sera implémentée ici');
+                /*
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Add title
+                doc.text('Rapport de Maturité DSI', 10, 10);
+                
+                // Add content
+                // You would need to use html2canvas to capture the report section
+                // and add it to the PDF
+                
+                doc.save('rapport-maturite-dsi.pdf');
+                */
+            });
+            
+            // Export to PowerPoint
+            document.getElementById('exportPPT').addEventListener('click', function() {
+                alert('Fonctionnalité d\'export PowerPoint sera implémentée ici');
+            });
+            
+            // Send by email
+            document.getElementById('sendEmail').addEventListener('click', function() {
+                const email = prompt('Veuillez entrer votre adresse email pour recevoir le rapport:');
+                if (email) {
+                    alert(`Un rapport détaillé sera envoyé à ${email}. (Fonctionnalité simulée)`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
