@@ -106,7 +106,7 @@ Dans un environnement économique et technologique en constante mutation, la **D
 53. **Outils d’analytics et BI** : Power BI, Tableau, Qlik Sense.
 54. **Gestion de projets** : MS Project, Jira, Trello, ClickUp.
 
-### **7. Bonus Catégorie A : Collaboration et culture d’entreprise**
+### **7. Collaboration et culture d’entreprise**
 
 55. Mettre en place des **rituels d’équipe IT réguliers** (stand-up, review).
 56. Favoriser le **travail collaboratif inter-départements**.
@@ -114,7 +114,7 @@ Dans un environnement économique et technologique en constante mutation, la **D
 58. Développer la **culture de l’innovation** par ateliers internes.
 59. Créer des **communautés de pratiques IT** pour partage REX.
 
-### **8. Bonus Catégorie B : Performance et optimisation**
+### **8.  Performance et optimisation**
 
 60. Monitorer les **performances applicatives et infrastructure**.
 61. Identifier et éliminer les **goulots d’étranglement IT**.
@@ -122,7 +122,7 @@ Dans un environnement économique et technologique en constante mutation, la **D
 63. Optimiser la **consommation cloud et coûts IT**.
 64. Définir des **SLA internes et externes** pour suivi performance.
 
-### **9. Bonus Catégorie C : Relation fournisseurs et partenaires**
+### **9. Relation fournisseurs et partenaires**
 
 65. Sélectionner les **fournisseurs IT stratégiques** selon la criticité.
 66. Mettre en place des **contrats clairs avec KPI et SLA**.
@@ -130,7 +130,7 @@ Dans un environnement économique et technologique en constante mutation, la **D
 68. Établir un **plan de continuité avec fournisseurs critiques**.
 69. Collaborer avec des **startups et fintechs** pour accélérer la transformation digitale.
 
-### **10. Bonus Catégorie D : Innovation avancée**
+### **10.  Innovation avancée**
 
 70. Tester l’**IA pour analyse prédictive et maintenance proactive**.
 71. Déployer des **solutions IoT pour suivi en temps réel**.
@@ -138,7 +138,7 @@ Dans un environnement économique et technologique en constante mutation, la **D
 73. Mettre en place des **dashboards décisionnels avancés**.
 74. Exploiter les **data lakes et big data** pour insights stratégiques.
 
-### **11. Bonus Catégorie E : Conformité, audit et résilience**
+### **11.   Conformité, audit et résilience**
 
 75. Mettre en place un **audit IT régulier**.
 76. Créer une **politique de conformité réglementaire** (RGPD, PCI DSS, ISO).
