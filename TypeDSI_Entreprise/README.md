@@ -276,40 +276,48 @@ Dans un environnement économique et technologique en constante mutation, la **D
 
 ---
 
-
-
 ---
 
 ## **4. Méthodologies de projet**
 
-| Aspect       | Startup            | PME                                | MPE                 | ETI                | Grand Groupe                      |
-| ------------ | ------------------ | ---------------------------------- | ------------------- | ------------------ | --------------------------------- |
-| Méthodologie | Agile, Scrum léger | Agile simple                       | Agile hybride       | Agile + PMO        | Agile à l’échelle (SAFe/LeSS)     |
-| Déploiement  | Rapide, itératif   | Rapide                             | Semi-structuré      | Progressif, piloté | Multi-filiales, phases strictes   |
-| Maintenance  | Très restreinte    | Externalisée ou interne restreinte | Mix interne/externe | Support dédié      | Support interne 24/7, SLA stricts |
+| Aspect           | Startup                                  | PME                                | MPE (Moyenne Petite Entreprise)  | ETI                                      | Grand Groupe                            |
+| ---------------- | ---------------------------------------- | ---------------------------------- | -------------------------------- | ---------------------------------------- | --------------------------------------- |
+| **Méthodologie** | Agile pur, Scrum/Kanban léger            | Agile simplifié adapté aux métiers | Agile hybride (Agile + V-cycle)  | Agile piloté par un PMO, méthodes mixtes | Agile à l’échelle (SAFe, LeSS, Prince2) |
+| **Déploiement**  | Rapide, itératif, parfois “test & learn” | Rapide, mais structuré             | Semi-structuré avec phases clés  | Progressif, gouverné par jalons          | Multi-filiales, phasage strict, comités |
+| **Maintenance**  | Très restreinte, parfois externalisée    | Externalisée ou interne restreinte | Mix interne/externe avec SLA bas | Support interne ou dédié                 | Support interne 24/7, SLA stricts, ITIL |
+
+💡 **Synthèse** : Plus l’organisation est grande, plus la gouvernance et la standardisation dominent. Les startups privilégient la vitesse, les grands groupes la robustesse et la conformité.
 
 ---
 
 ## **5. Gestion des risques et conformité**
 
-| Startup                  | PME              | MPE       | ETI                  | Grand Groupe                    |
-| ------------------------ | ---------------- | --------- | -------------------- | ------------------------------- |
-| Réactive                 | Réactive, simple | Proactive | Proactive avec audit | Stratégique, audit & conformité |
-| **Cas pratique / REX** : |                  |           |                      |                                 |
+| Aspect             | Startup                                                 | PME                                     | MPE                                                      | ETI                                                      | Grand Groupe                                                                     |
+| ------------------ | ------------------------------------------------------- | --------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Approche**       | Réactive, corrective rapide                             | Réactive avec quelques règles de base   | Proactive, premières politiques formelles                | Proactive, audits internes, ISO/GDPR                     | Stratégique, gouvernance globale, SOC, conformité stricte                        |
+| **Normes**         | Peu ou pas de normes                                    | RGPD basique, sauvegardes               | ISO 27001 en préparation                                 | ISO/ITIL appliqués partiellement                         | Multi-normes (ISO 27001, SOX, NIS2, etc.)                                        |
+| **Exemples (REX)** | Perte de données → mise en place sauvegarde cloud + MFA | Intrusion simple → antivirus centralisé | Audit ISO révèle faille → création SOC léger + formation | Audit interne détecte phishing → mise en place d’un SIEM | Attaque ransomware stoppée grâce au DRP → tests trimestriels + playbooks activés |
 
-* Startup : perte données → sauvegarde cloud et MFA obligatoire.
-* MPE : audit ISO révèle vulnérabilité → création SOC léger et formation.
-* Grand Groupe : attaque ransomware stoppée grâce DRP, REX → tests trimestriels et playbooks.
+💡 **Synthèse** : La gestion des risques évolue de l’**informel** (startup/PME) vers une **industrialisation** complète et auditable (ETI/Grand Groupe).
 
 ---
 
 ## **6. Culture et RH**
 
-| Critère               | Startup           | PME    | MPE             | ETI                 | Grand Groupe                      |
-| --------------------- | ----------------- | ------ | --------------- | ------------------- | --------------------------------- |
-| Flexibilité           | Très élevée       | Élevée | Moyenne         | Moyenne             | Faible                            |
-| Proximité métiers     | Très forte        | Forte  | Moyenne         | Moyenne             | Faible                            |
-| Gestion du changement | Ad hoc, itérative | Ad hoc | Semi-formalisée | Processus formalisé | Processus structuré multi-niveaux |
+| Critère                   | Startup                              | PME                                     | MPE                                 | ETI                                                 | Grand Groupe                                                      |
+| ------------------------- | ------------------------------------ | --------------------------------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------- |
+| **Flexibilité**           | Très élevée (polyvalence totale)     | Élevée (équipes réduites)               | Moyenne (début de spécialisation)   | Moyenne (équipes spécialisées mais adaptables)      | Faible (processus lourds, métiers cloisonnés)                     |
+| **Proximité métiers**     | Très forte (IT = Business)           | Forte                                   | Moyenne                             | Moyenne (équipes IT dédiées, moins proches)         | Faible (couches hiérarchiques, silos métiers)                     |
+| **Gestion du changement** | Ad hoc, itérative (résilience forte) | Ad hoc (accompagnement limité)          | Semi-formalisée (plans partiels)    | Processus formalisé (change management ITIL/Prosci) | Processus structuré multi-niveaux, conduite du changement globale |
+| **Attractivité RH**       | Forte pour profils jeunes/innovants  | Moyenne (équilibre stabilité/souplesse) | Plus structurée, avantages modestes | Bonne (carrière, mobilité interne)                  | Très forte (marque employeur, avantages sociaux)                  |
+
+💡 **Synthèse** :
+
+* **Startup/PME** = attractivité par la flexibilité et la proximité.
+* **ETI/Grand Groupe** = attractivité par la carrière, la sécurité et les avantages, mais inertie plus forte au changement.
+
+---
+
 
 ---
 
