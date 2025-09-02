@@ -334,7 +334,5 @@ Dans un environnement économique et technologique en constante mutation, la **D
 
 ---
 
-Si tu veux, je peux maintenant créer **un tableau détaillé “pièce par pièce”** pour chaque type d’entreprise (finance, production, RH, marketing, IT) avec **budget IT, REX, bonnes pratiques et cas pratiques** pour **startup → grand groupe**.
-
 
 
