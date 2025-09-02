@@ -1,4 +1,4 @@
-# ** Comparatif stratégique des types d’entreprise et de la DSI : Startup, PME, MPE, ETI et Grand Groupe**
+#  Comparatif stratégique des types d’entreprise et de la DSI : Startup, PME, MPE, ETI et Grand Groupe
 
 ---
 
