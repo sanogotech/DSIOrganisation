@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stratégies DSI par Type d'Entreprise</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --light-bg: #f8f9fa;
+      --dark-bg: #343a40;
+      --startup-color: #ff7f2a;
+      --pme-color: #4d8af0;
+      --mpe-color: #9b59b6;
+      --eti-color: #2ecc71;
+      --grandgroupe-color: #e74c3c;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      color: white;
+      font-weight: 600;
+    }
+
+    .startup-bg {
+      background-color: var(--startup-color);
+    }
+
+    .pme-bg {
+      background-color: var(--pme-color);
+    }
+
+    .mpe-bg {
+      background-color: var(--mpe-color);
+    }
+
+    .eti-bg {
+      background-color: var(--eti-color);
+    }
+
+    .grandgroupe-bg {
+      background-color: var(--grandgroupe-color);
+    }
+
+    .module-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--secondary-color);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #3a7bd5;
+    }
+
+    .btn-outline-primary {
+      color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .comparison-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .process-step:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+
+    .process-step:after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: 100%;
+      background-color: var(--secondary-color);
+    }
+
+    .process-step:last-child:after {
+      display: none;
+    }
+
+    .data-table {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .data-table th {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .highlight-box {
+      background-color: rgba(77, 138, 240, 0.1);
+      border-left: 4px solid var(--secondary-color);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .linked-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .linked-module {
+      background-color: var(--light-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      border: 1px solid #ddd;
+    }
+
+    .tab-content {
+      padding: 1.5rem 0;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    /* Animation for cards */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .module-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    /* Animation delay for each card */
+    .module-card:nth-child(1) { animation-delay: 0.1s; }
+    .module-card:nth-child(2) { animation-delay: 0.2s; }
+    .module-card:nth-child(3) { animation-delay: 0.3s; }
+    .module-card:nth-child(4) { animation-delay: 0.4s; }
+    .module-card:nth-child(5) { animation-delay: 0.5s; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 0;
+      }
+
+      .module-icon {
+        font-size: 1.5rem;
+      }
+    }
+
+    .type-indicator {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .type-startup {
+      background-color: var(--startup-color);
+    }
+
+    .type-pme {
+      background-color: var(--pme-color);
+    }
+
+    .type-mpe {
+      background-color: var(--mpe-color);
+    }
+
+    .type-eti {
+      background-color: var(--eti-color);
+    }
+
+    .type-grandgroupe {
+      background-color: var(--grandgroupe-color);
+    }
+
+    .maturity-chart {
+      height: 300px;
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-building me-2"></i>Stratégies DSI par Type d'Entreprise
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#introduction">Introduction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#comparatif">Comparatif</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#bonnes-pratiques">Bonnes pratiques</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cybersecurite">Cybersécurité</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#erp">ERP & SI</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cloud">Cloud</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#innovation">Innovation</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Stratégies DSI par Type d'Entreprise</h1>
+      <p class="lead mb-4">Découvrez les bonnes pratiques, défis et solutions IT adaptés à chaque type d'entreprise</p>
+      <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <span class="badge bg-startup me-2"><span class="type-indicator type-startup"></span>Startup</span>
+        <span class="badge bg-pme me-2"><span class="type-indicator type-pme"></span>PME</span>
+        <span class="badge bg-mpe me-2"><span class="type-indicator type-mpe"></span>MPE</span>
+        <span class="badge bg-eti me-2"><span class="type-indicator type-eti"></span>ETI</span>
+        <span class="badge bg-grandgroupe"><span class="type-indicator type-grandgroupe"></span>Grand Groupe</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-5">
+    <section id="introduction" class="mb-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="text-center mb-4">Introduction</h2>
+          <div class="highlight-box">
+            <p>Dans un environnement économique et technologique en constante mutation, la <strong>Direction des Systèmes d'Information (DSI)</strong> est un levier clé pour la <strong>performance, la compétitivité et la pérennité des entreprises</strong>.</p>
+            <p class="mb-0">Selon la taille et le stade de maturité de l'entreprise, les <strong>priorités, défis et opportunités</strong> varient considérablement.</p>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="mb-0">Enjeux principaux</h5>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>Aligner la technologie sur la stratégie métier</li>
+                    <li>Sécuriser les données et assurer la continuité des activités</li>
+                    <li>Automatiser les processus et optimiser les coûts</li>
+                    <li>Innover pour rester compétitif</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header bg-warning text-dark">
+                  <h5 class="mb-0">Défis majeurs</h5>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>Cybersécurité et gestion des risques</li>
+                    <li>Transformation digitale et intégration des systèmes</li>
+                    <li>Gouvernance IT et budgets limités</li>
+                    <li>Adoption de nouvelles technologies</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-header bg-success text-white">
+                  <h5 class="mb-0">Opportunités</h5>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    <li>Accélération par le numérique et SaaS</li>
+                    <li>Optimisation des processus et réduction des coûts</li>
+                    <li>Amélioration de l'expérience client</li>
+                    <li>Adoption de l'IA, IoT et automatisation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="comparatif" class="mb-5">
+      <h2 class="text-center mb-4">Comparatif des types d'entreprise</h2>
+      
+      <div class="comparison-container">
+        <h4 class="mb-4">Définitions et critères</h4>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Type d'entreprise</th>
+                <th>Salariés</th>
+                <th>Chiffre d'affaires</th>
+                <th>Total bilan</th>
+                <th>Contexte IT typique</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="type-indicator type-startup"></span> <strong>Startup</strong></td>
+                <td>1-50</td>
+                <td>&lt; 5 M€</td>
+                <td>&lt; 2 M€</td>
+                <td>Très agile, cloud-first, outils SaaS, faible budget IT</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-pme"></span> <strong>PME</strong></td>
+                <td>10-249</td>
+                <td>&lt; 50 M€</td>
+                <td>&lt; 43 M€</td>
+                <td>DSI réduite, priorités opérationnelles, solutions flexibles</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-mpe"></span> <strong>MPE</strong></td>
+                <td>250-499</td>
+                <td>50-100 M€</td>
+                <td>43-80 M€</td>
+                <td>DSI structurée mais légère, projets stratégiques limités</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-eti"></span> <strong>ETI</strong></td>
+                <td>500-4 999</td>
+                <td>100 M€ - 1,5 Md€</td>
+                <td>80 M€ - 2 Md€</td>
+                <td>DSI structurée par département, projets stratégiques, gouvernance IT</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-grandgroupe"></span> <strong>Grand Groupe</strong></td>
+                <td>≥ 5 000</td>
+                <td>> 1,5 Md€</td>
+                <td>> 2 Md€</td>
+                <td>DSI complexe, gouvernance rigoureuse, cybersécurité critique</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-5">
+          <h4 class="mb-4">Organisation et rôle de la DSI</h4>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Critère</th>
+                  <th>Startup</th>
+                  <th>PME</th>
+                  <th>MPE</th>
+                  <th>ETI</th>
+                  <th>Grand Groupe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Structure</strong></td>
+                  <td>1-3 personnes, polyvalentes</td>
+                  <td>1-5 personnes, polyvalentes</td>
+                  <td>5-15 personnes, spécialisation débutante</td>
+                  <td>10-50 personnes, équipes spécialisées</td>
+                  <td>100+ personnes, directions IT segmentées</td>
+                </tr>
+                <tr>
+                  <td><strong>Rôle stratégique</strong></td>
+                  <td>Innovation rapide, support des fondateurs</td>
+                  <td>Support métier opérationnel</td>
+                  <td>Mix support/stratégie pour croissance</td>
+                  <td>Support et stratégie, pilotage projets</td>
+                  <td>Stratégique, innovation, gouvernance globale</td>
+                </tr>
+                <tr>
+                  <td><strong>Budget IT</strong></td>
+                  <td>&lt; 3% CA</td>
+                  <td>&lt; 5% CA</td>
+                  <td>5-7% CA</td>
+                  <td>5-10% CA</td>
+                  <td>> 10% CA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bonnes-pratiques" class="mb-5">
+      <h2 class="text-center mb-4">Top bonnes pratiques pour la DSI</h2>
+      
+      <ul class="nav nav-tabs justify-content-center mb-4" id="pratiquesTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="gouvernance-tab" data-bs-toggle="tab" data-bs-target="#gouvernance" type="button" role="tab">Gouvernance</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="cyber-tab" data-bs-toggle="tab" data-bs-target="#cyber" type="button" role="tab">Cybersécurité</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="transformation-tab" data-bs-toggle="tab" data-bs-target="#transformation" type="button" role="tab">Transformation</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="rh-tab" data-bs-toggle="tab" data-bs-target="#rh" type="button" role="tab">RH & Organisation</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="pratiquesTabContent">
+        <div class="tab-pane fade show active" id="gouvernance" role="tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-header bg-primary text-white">
+                  <h5 class="mb-0">Gouvernance et pilotage</h5>
+                </div>
+                <div class="card-body">
+                  <ol>
+                    <li>Mettre en place un <strong>PMO</strong> adapté à la taille de l'entreprise</li>
+                    <li>Définir des <strong>KPIs clairs</strong> pour chaque projet IT</li>
+                    <li>Suivre un <strong>plan stratégique IT</strong> aligné sur la stratégie métier</li>
+                    <li>Créer un <strong>comité IT</strong> pour validation des décisions critiques</li>
+                    <li>Déployer une <strong>gestion documentaire centralisée</strong></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-header bg-info text-white">
+                  <h5 class="mb-0">Méthodologie de projet</h5>
+                </div>
+                <div class="card-body">
+                  <ol start="6">
+                    <li>Adapter la méthodologie au type d'entreprise</li>
+                    <li>Déployer progressivement selon priorité métier</li>
+                    <li>Mesurer le <strong>ROI et performances</strong> à chaque étape</li>
+                    <li>Formaliser un <strong>plan de tests et de validation</strong></li>
+                    <li>Intégrer les <strong>méthodes DevOps et CI/CD</strong></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane fade" id="cyber" role="tabpanel">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header bg-warning text-dark">
+                  <h5 class="mb-0">Cybersécurité et gestion des risques</h5>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ol start="11">
+                        <li>Implémenter un <strong>SOC</strong> même minimal pour PME/MPE</li>
+                        <li>Activer le <strong>MFA</strong> pour tous les accès sensibles</li>
+                        <li>Sauvegarde régulière et <strong>réplication des données</strong></li>
+                        <li>Réaliser des <strong>pentests réguliers</strong> et simulations d'attaques</li>
+                        <li>Établir une <strong>politique de sécurité IT</strong> claire</li>
+                      </ol>
+                    </div>
+                    <div class="col-md-6">
+                      <ol start="16">
+                        <li>Former les équipes aux <strong>pratiques de sécurité</strong></li>
+                        <li>Mettre en place un <strong>plan de continuité et de reprise d'activité</strong></li>
+                        <li>Assurer la <strong>conformité réglementaire</strong></li>
+                        <li>Surveiller et mettre à jour régulièrement les systèmes</li>
+                        <li>Segmentation réseau et contrôle d'accès</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane fade" id="transformation" role="tabpanel">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header bg-success text-white">
+                  <h5 class="mb-0">Transformation digitale et innovation</h5>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <ol start="21">
+                        <li>Déployer des <strong>solutions SaaS cloud-first</strong></li>
+                        <li>Commencer par un <strong>MVP</strong> pour tester rapidement</li>
+                        <li>Piloter des <strong>PoC</strong> avant industrialisation</li>
+                        <li>Exploiter l'<strong>IA et l'IoT</strong> pour automatisation</li>
+                        <li>Automatiser les processus avec <strong>RPA</strong></li>
+                      </ol>
+                    </div>
+                    <div class="col-md-6">
+                      <ol start="26">
+                        <li>Mettre en place un <strong>lab innovation</strong></li>
+                        <li>Collaborer avec des startups et partenaires technologiques</li>
+                        <li>Utiliser les <strong>API et microservices</strong></li>
+                        <li>Déployer des <strong>dashboards et analytics en temps réel</strong></li>
+                        <li>Tester les <strong>solutions low-code/no-code</strong></li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane fade" id="rh" role="tabpanel">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-header bg-secondary text-white">
+                  <h5 class="mb-0">Organisation et ressources humaines</h5>
+                </div>
+                <div class="card-body">
+                  <ol start="31">
+                    <li>Former les équipes métiers aux <strong>outils IT</strong></li>
+                    <li>Encourager une <strong>culture agile</strong> et l'itération rapide</li>
+                    <li>Documenter les <strong>procédures critiques</strong></li>
+                    <li>Mettre en place un <strong>plan de succession IT</strong></li>
+                    <li>Encourager la <strong>polyvalence des équipes IT</strong></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card h-100">
+                <div class="card-header bg-dark text-white">
+                  <h5 class="mb-0">Collaboration et culture d'entreprise</h5>
+                </div>
+                <div class="card-body">
+                  <ol start="36">
+                    <li>Mettre en place des <strong>rituels d'équipe IT réguliers</strong></li>
+                    <li>Favoriser le <strong>travail collaboratif inter-départements</strong></li>
+                    <li>Encourager la <strong>transparence sur les décisions IT</strong></li>
+                    <li>Développer la <strong>culture de l'innovation</strong></li>
+                    <li>Créer des <strong>communautés de pratiques IT</strong></li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cybersecurite" class="mb-5">
+      <h2 class="text-center mb-4">Cybersécurité par type d'entreprise</h2>
+      
+      <div class="comparison-container">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Type d'entreprise</th>
+                <th>Niveau de maturité</th>
+                <th>Risques principaux</th>
+                <th>Bonnes pratiques</th>
+                <th>REX (Retours d'expérience)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="type-indicator type-startup"></span> <strong>Startup</strong></td>
+                <td>Très faible</td>
+                <td>Phishing, ransomware, perte de données</td>
+                <td>MFA obligatoire, sauvegarde cloud, sensibilisation rapide</td>
+                <td>Une startup fintech a perdu ses données clients après un ransomware → Mise en place cloud sécurisé + formation</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-pme"></span> <strong>PME</strong></td>
+                <td>Basique</td>
+                <td>Vol de données clients, phishing ciblé</td>
+                <td>Antivirus & firewall, formation utilisateurs, sauvegarde externe</td>
+                <td>Une PME e-commerce victime de fraude → Adoption MFA + procédure double validation</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-mpe"></span> <strong>MPE</strong></td>
+                <td>Standardisation progressive</td>
+                <td>Intrusions externes, erreurs humaines</td>
+                <td>Audit annuel, plan de continuité IT, sauvegardes automatisées</td>
+                <td>Une MPE industrielle a perdu 3 jours de production → Mise en place PRA réduit reprise à 6h</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-eti"></span> <strong>ETI</strong></td>
+                <td>Bonne maturité</td>
+                <td>Cyberattaques ciblées, ransomware avancés</td>
+                <td>SOC interne, ISO27001/NIST, tests de phishing, gestion IAM</td>
+                <td>Une ETI agroalimentaire subit un ransomware → SOC + segmentation réseau permet reprise en <48h</td>
+              </tr>
+              <tr>
+                <td><span class="type-indicator type-grandgroupe"></span> <strong>Grand Groupe</strong></td>
+                <td>Très élevée</td>
+                <td>APT, cyberespionnage, fuite massive</td>
+                <td>SOC 24/7 + SIEM, pentest régulier, DRP testé, Zéro Trust</td>
+                <td>Une banque attaquée par ransomware → DRP multi-sites + backups immuables assurent continuité</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="erp" class="mb-5">
+      <h2 class="text-center mb-4">ERP et Systèmes d'Information</h2>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">Comparatif ERP par type d'entreprise</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Type d'entreprise</th>
+                      <th>Maturité ERP</th>
+                      <th>Solutions typiques</th>
+                      <th>Bonnes pratiques</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="type-indicator type-startup"></span> <strong>Startup</strong></td>
+                      <td>Pas d'ERP, outils SaaS</td>
+                      <td>Excel, Trello, QuickBooks, Notion, Airtable</td>
+                      <td>Centraliser données clients, intégrer CRM léger</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-pme"></span> <strong>PME</strong></td>
+                      <td>ERP simple SaaS</td>
+                      <td>Odoo, Dolibarr, Zoho</td>
+                      <td>ERP SaaS multi-modules, former les utilisateurs</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-mpe"></span> <strong>MPE</strong></td>
+                      <td>ERP modulaire</td>
+                      <td>SAP Business One, Odoo multi-filiale</td>
+                      <td>Déployer par modules, impliquer les métiers</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-eti"></span> <strong>ETI</strong></td>
+                      <td>ERP robuste, multi-sites</td>
+                      <td>SAP, Microsoft Dynamics</td>
+                      <td>Déploiement progressif, KPI de suivi, centre de compétences</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-grandgroupe"></span> <strong>Grand Groupe</strong></td>
+                      <td>ERP global, homogénéisé</td>
+                      <td>SAP/Oracle centralisé</td>
+                      <td>Standardisation globale, gouvernance multi-niveaux</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cloud" class="mb-5">
+      <h2 class="text-center mb-4">Cloud et Infrastructure</h2>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Stratégies Cloud par type d'entreprise</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Type d'entreprise</th>
+                      <th>Maturité Cloud</th>
+                      <th>Solutions typiques</th>
+                      <th>Bonnes pratiques</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="type-indicator type-startup"></span> <strong>Startup</strong></td>
+                      <td>Full Cloud</td>
+                      <td>AWS, GCP, Azure</td>
+                      <td>Multi-tenant SaaS, backup cloud, choix fournisseur fiable</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-pme"></span> <strong>PME</strong></td>
+                      <td>Cloud first</td>
+                      <td>Microsoft 365, AWS, OVHcloud</td>
+                      <td>Cloud public, sauvegarde externe, politique d'accès IAM</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-mpe"></span> <strong>MPE</strong></td>
+                      <td>Mix cloud + on-premise</td>
+                      <td>Hybride (OVH + Azure, etc.)</td>
+                      <td>Hybrid cloud, sauvegarde hors site, supervision unifiée</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-eti"></span> <strong>ETI</strong></td>
+                      <td>Cloud hybride multi-sites</td>
+                      <td>Multi-cloud privé/public</td>
+                      <td>DRP testé, supervision centralisée, conformité RGPD</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-grandgroupe"></span> <strong>Grand Groupe</strong></td>
+                      <td>Hybrid/multi-cloud global</td>
+                      <td>Multi-cloud (AWS, Azure, GCP)</td>
+                      <td>Multi-cloud, redondance multi-zone, Zéro Trust</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="innovation" class="mb-5">
+      <h2 class="text-center mb-4">Innovation Digitale</h2>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0">Stratégies d'innovation par type d'entreprise</h5>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Type d'entreprise</th>
+                      <th>Focus innovation</th>
+                      <th>Outils et technologies</th>
+                      <th>Bonnes pratiques</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="type-indicator type-startup"></span> <strong>Startup</strong></td>
+                      <td>MVP rapide, pivot</td>
+                      <td>Low-code, IA générative</td>
+                      <td>Itérer rapidement, tester avec utilisateurs</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-pme"></span> <strong>PME</strong></td>
+                      <td>Automatisation, efficacité</td>
+                      <td>RPA, SaaS, IA prédictive</td>
+                      <td>Automatiser les processus, mesurer ROI</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-mpe"></span> <strong>MPE</strong></td>
+                      <td>Amélioration continue</td>
+                      <td>BI, IoT, RPA</td>
+                      <td>Piloter PoC, impliquer les métiers</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-eti"></span> <strong>ETI</strong></td>
+                      <td>Innovation produits/services</td>
+                      <td>IA, IoT, blockchain</td>
+                      <td>Lab innovation, partenariats startups</td>
+                    </tr>
+                    <tr>
+                      <td><span class="type-indicator type-grandgroupe"></span> <strong>Grand Groupe</strong></td>
+                      <td>Transformation digitale</td>
+                      <td>IA, IoT, blockchain, métavers</td>
+                      <td>Corporate venture, acquisition startups</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>Stratégies DSI par Type d'Entreprise</h5>
+          <p>Un guide complet pour adapter votre stratégie IT à la taille et aux besoins de votre entreprise.</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Liens rapides</h5>
+          <ul class="list-unstyled">
+            <li><a href="#introduction" class="text-white">Introduction</a></li>
+            <li><a href="#comparatif" class="text-white">Comparatif</a></li>
+            <li><a href="#bonnes-pratiques" class="text-white">Bonnes pratiques</a></li>
+            <li><a href="#cybersecurite" class="text-white">Cybersécurité</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Modules</h5>
+          <ul class="list-unstyled">
+            <li><a href="#erp" class="text-white">ERP & SI</a></li>
+            <li><a href="#cloud" class="text-white">Cloud</a></li>
+            <li><a href="#innovation" class="text-white">Innovation</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4 bg-light">
+      <div class="text-center">
+        <p class="mb-0">© 2023 Stratégies DSI par Type d'Entreprise. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Animation pour les sections
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
