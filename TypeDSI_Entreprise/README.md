@@ -203,6 +203,27 @@ Dans un environnement économique et technologique en constante mutation, la **D
 * ETI : ISO27001, SOC interne.
 * Grand Groupe : Pentest régulier, DRP, simulations cyberattaques.
 
+
+
+| Type d’entreprise                   | Niveau de maturité                             | Risques principaux                                                     | Exigences et contraintes                                                                      | Bonnes pratiques                                                                                                          | REX (retours d’expérience)                                                                                                                                                    |
+| ----------------------------------- | ---------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Startup**                         | Très faible maturité, ressources limitées      | Phishing, ransomware, perte de données, dépendance au cloud            | Budget réduit, manque de compétences internes, croissance rapide                              | - MFA obligatoire<br>- Sauvegarde cloud<br>- Sensibilisation rapide (formation express)<br>- Choix SaaS sécurisé          | Une startup fintech a perdu ses données clients après un ransomware. REX : mise en place d’un cloud sécurisé + formation express en cybersécurité a réduit 80% des incidents. |
+| **PME**                             | Basique, souvent sous-estimée                  | Vol de données clients, phishing ciblé, compromission e-mail           | Conformité RGPD, mais peu de ressources IT                                                    | - Antivirus & firewall<br>- Formation utilisateurs<br>- Sauvegarde externe<br>- MFA sur messagerie                        | Une PME du e-commerce victime de fraude au virement. REX : adoption MFA + procédure double validation financière a stoppé les attaques.                                       |
+| **MPE (Moyenne Petite Entreprise)** | Standardisation progressive                    | Intrusions externes, erreurs humaines, perte de continuité             | Début de formalisation IT, dépendance ERP/CRM                                                 | - Audit annuel<br>- Plan de continuité IT<br>- Sauvegardes automatisées<br>- Politique de mots de passe                   | Une MPE industrielle a perdu 3 jours de production après panne serveur. REX : mise en place d’un PRA (plan de reprise) a réduit la reprise à 6h.                              |
+| **ETI**                             | Bonne maturité, cybersécurité structurée       | Cyberattaques ciblées, ransomware avancés, fraudes                     | Obligations ISO27001/NIST, gouvernance renforcée                                              | - SOC interne ou MSSP<br>- ISO27001 ou NIST<br>- Tests de phishing<br>- Gestion des identités IAM                         | Une ETI agroalimentaire a subi un ransomware stoppant 2 usines. REX : déploiement SOC + segmentation réseau a permis reprise en <48h.                                         |
+| **Grand Groupe**                    | Très élevée, souvent cible d’attaques massives | APT (attaques persistantes), cyberespionnage, fuite massive de données | Conformité stricte (RGPD, PCI DSS, SOX, ISO27001), obligations légales, enjeux réputationnels | - SOC 24/7 + SIEM<br>- Pentest régulier<br>- DRP & PRA testés<br>- Simulations cyberattaques<br>- Zéro Trust Architecture | Une banque internationale attaquée par ransomware sophistiqué. REX : DRP multi-sites + backups immuables ont assuré continuité et protection des données.                     |
+
+---
+
+🔑 **Ce qui ressort :**
+
+* **Startup/PME** → protection basique mais vitale (MFA, backup, sensibilisation).
+* **MPE/ETI** → standardisation, SOC léger, audits annuels, plans de continuité.
+* **Grand Groupe** → gouvernance mondiale, SOC 24/7, conformité ISO/NIST, résilience multi-sites.
+
+---
+
+
 ---
 
 ### **3.2 ERP / systèmes d’information**
