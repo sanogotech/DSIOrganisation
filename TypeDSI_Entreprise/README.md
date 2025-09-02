@@ -2,6 +2,7 @@
 
 ---
 
+
 ## **Introduction détaillée**
 
 Dans un environnement économique et technologique en constante mutation, la **Direction des Systèmes d’Information (DSI)** est un levier clé pour la **performance, la compétitivité et la pérennité des entreprises**. Selon la taille et le stade de maturité de l’entreprise, les **priorités, défis et opportunités** varient considérablement.
